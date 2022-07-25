@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.principal {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+}
+
+
+.card {
+  margin-top: 10vh;
+  height: 50vh;
+  width: 31vw;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 2vw;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card-title {
+  margin-bottom: 5vh;
+}
+
+.card-text {
+  margin-bottom: 1rem;
+}
+
+
+#btn-style {
+  background-color: var(--verdeClaro);
+  border-color: var(--cinza);
+}
+
+#btn-style:hover {
+  background-color: #023d2ac4;
+}
+
+.card:first-child {
+  margin-left: 1vw;
+}
+
+@media screen and (max-width: 768px) {
+  .principal {
+    flex-direction: column;
+    height: 170vh;
+  }
+
+  .card-body {
+    width: 95vw;
+  }
+}

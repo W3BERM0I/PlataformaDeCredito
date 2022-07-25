@@ -1,0 +1,84 @@
+main {
+  display: flex;
+}
+
+h1 {
+  color: var(--verdeClaro);
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.aside {
+  width: 50vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 5vh;
+}
+
+.caixa-aside {
+  width: 40vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--brancoClaro);
+  border-radius: 15%;
+  border: .2rem solid var(--cinzaEscuro);
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.titulo {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--cinza);
+}
+
+.conteudo {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70vw;
+  height: 15vh;
+  border: .2rem solid var(--cinzaEscuro);
+  border-radius: 15%;
+  margin-top: 3vh;
+
+}
+
+.form-atributes {
+  display: flex;
+}
+
+.info {
+  font-size: 2rem;
+  font-weight: 700;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1vw 0 2vw;
+}
+
+.card-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+#status {
+  width: 7vw;
+}
+
+.button {
+  margin-left: 1vw;
+  width: 10vw;
+}

@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.principal {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+}
+
+
+main {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lista__emprestimos {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--verdeClaro);
+  padding: 1%;
+}
+
+.tbhead {
+  background-color: var(--verdeClaro);
+}
+
+td {
+  color: var(--cinza);
+}
+
+.bo {
+  background-color: var(--verdeClaro);
+  color: var(--brancoEscuro);
+}
+
+.cria_emprestimos {
+  width: 15%;
+  padding: .5em 0px;
+  margin-top: 1.9em;
+  border-radius: 8px;
+  background-color: var(--verdeClaro);
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px var(--preto);
+  display: flex;
+}
+
+.bnovo {
+  text-decoration: none;
+  color: var(--cinzaEscuro);
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+  padding-left: 3vw;
+  width: 10vw;
+}
+
+.bnovo:hover {
+  color: var(--brancoEscuro);
+}
+
+.c {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 5vw;
+}

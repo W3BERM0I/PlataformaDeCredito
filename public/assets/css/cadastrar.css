@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,900&display=swap');
+
+body {
+  background-color: var(--brancoClaro);
+  font-family: 'Lato', sans-serif;
+}
+
+.textfield {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.info-cadastro h2 {
+  margin-top: 5vh;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.info-cadastro p {
+  margin-top: 5vh;
+  margin-bottom: 3vh;
+  text-align: center;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.mobile {
+  display: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form>label {
+  margin: auto;
+  align-items: center;
+}
+
+.form-cadastro {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1vh;
+  font-size: 1.5rem;
+  justify-content: center;
+}
+
+.form-cadastro>label {
+  margin-bottom: 1vh;
+  height: 2rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.form-cadastro>input {
+  height: 6vh;
+  width: 40vw;
+  background-color: var(--verdeClaro);
+  border: 1px solid var(--preto);
+  border-radius: 5vh;
+  text-align: center;
+}
+
+.form-cadastro>input::placeholder {
+  color: var(--preto);
+}
+
+.submit input {
+  height: 8vh;
+  width: 35vw;
+  background-color: var(--preto);
+  color: var(--brancoClaro);
+  border: 1px solid var(--preto);
+  border-radius: 20px;
+  margin: 3vh 0 3vh;
+  font-size: 1.5rem;
+}
+
+.submit input:hover {
+  background-color: var(--brancoEscuro);
+  color: var(--preto);
+  border: 1px solid var(--preto);
+}
+
+@media screen and (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: inline-block;
+    font-weight: 100;
+  }
+
+  .input {
+    width: 60vw;
+  }
+
+  .submit input {
+    width: 45vw;
+  }
+
+  #nome_completo {
+    display: flex;
+    margin-top: 10vh;
+  }
+
+  #nome {
+    justify-content: center;
+    align-items: center;
+    margin-left: 9vw;
+  }
+
+  .confirmar_senha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #confirmarSenha {
+    margin-left: 13vw;
+  }
+}

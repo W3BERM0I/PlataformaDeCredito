@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,900&display=swap');
+
+body {
+  font-family: 'Nato', sans-serif;
+}
+
+.cabecalhoPrincipal-titulo a {
+  font-size: 3rem;
+}
+
+main {
+  width: 100vw;
+  height: 70vh;
+  background-color: var(--preto);
+  color: var(--brancoClaro);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: none;
+}
+
+.solucoes__texto {
+  font-weight: 400;
+  font-size: 2.5rem;
+  margin-left: 5vw;
+}
+
+.caixa {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  padding-left: 5vw;
+}
+
+.caixa__propaganda {
+  justify-content: center;
+  width: 60vw;
+}
+
+.caixa__titulo {
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 5vh;
+  align-items: center;
+}
+
+.caixa__texto {
+  font-size: 2rem;
+}
+
+.caixa__imagem {
+  width: 30vw;
+  justify-content: end;
+  padding-right: 5vw;
+}
+
+.solucoes {
+  background-color: var(--verdeClaro);
+  height: 60vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 2px solid;
+  /*align-items: flex-end;*/
+}
+
+.solucoes__cred:nth-child(1) {
+  margin-left: 3vw;
+}
+
+.solucoes__cred:nth-child(3) {
+  margin-right: 20vw;
+}
+
+.solucoes>.solucoes__cred {
+  background-color: var(--brancoClaro);
+  color: var(--preto);
+  height: 50vh;
+  width: 30vw;
+  margin: 5vh 0.5vw 0vh;
+  border-radius: 25px;
+  border: 2px solid var(--preto);
+  /* flex-grow: 0; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0vw;
+
+}
+
+.solucoes__titulo {
+  font-size: 2.5rem;
+  margin-bottom: 3vh;
+}
+
+.solucoes__texto {
+  font-size: 1.5rem;
+  margin-bottom: 3vh; 
+  padding: 1px;
+}
+
+.solucoes__button {
+  width: 20vw;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--brancoClaro);
+  padding: 0.7rem;
+  background-color: var(--preto);
+  border-radius: 25px;
+}
+
+
+
+#futuro {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--brancoEscuro);
+}
+
+.futuro__titulo {
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  background-color: var(--brancoEscuro);
+}
+
+.futuro__conteudo {
+  justify-content: center;
+  align-items: auto;
+  font-size: 3rem;
+  margin: auto;
+
+}
+
+.missaoVisaoValores {
+  display: flex;
+  width: 100vw;
+  height: 50vh;
+  background-color: var(--brancoEscuro);
+}
+
+.missaoVisaoValores__card {
+  width: 33.3%;
+  height: 50vh;
+  background-color: var(--brancoClaro);
+  border: none;
+  border-radius: 10%;
+  margin-right: 1vw;
+  margin-bottom: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: content-box;
+}
+
+.missaoVisaoValores__titulo {
+  font-size: 2rem;
+  margin: 2vh 0 2vh 0;
+  color: var(--verdeClaro);
+}
+
+.missaoVisãoValores__texto {
+  font-size: 1.5rem;
+  margin: 2vh 1vw 2vh 1vw;
+  color: var(--cinza);
+  padding: 1px;
+}
+
+.valores__lista {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%;
+}
+
+.valores__items {
+  margin: 2%;
+  color: var(--cinza);
+}
+
+.loc {
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.loc h3 {
+  /*text-align: center;*/
+  margin: auto 0 auto 2vw;
+  font-size: 2.5rem;
+  flex-wrap: wrap;
+  width: 20vw;
+  width: 80vw;
+}
+
+.map {
+  width: 70vw;
+}
+
+@media screen and (max-width: 768px) {
+  .solucoes {
+    flex-direction: row;
+  }
+
+  .caixa__imagem {
+    display: none;
+  }
+
+  .caixa__titulo {
+    font-size: 2rem;
+
+  }
+
+  .caixa {
+    height: 60vh;
+  }
+
+  .caixa__texto {
+    font-size: 1.3rem;
+  }
+
+  .loc {
+    flex-direction: column;
+    height: 30vh;
+  }
+
+  .loc>h3 {
+    height: 20vh;
+    margin-top: 0%;
+    margin-bottom: 5vh;
+  }
+
+  .map {
+    width: 100vw;
+    height: 30vh;
+  }
+
+  .loc>h3 {
+    font-size: 2rem;
+  }
+
+  .solucoes {
+    display: flex;
+    flex-direction: column;
+    height: 145vh;
+  }
+
+  .solucoes>.solucoes__cred {
+    height: 45vh;
+    width: 95vw;
+    justify-content: flex-end;
+  }
+
+  .solucoes__titulo {
+    font-size: 1.5rem;
+  }
+
+  .solucoes__texto {
+    font-size: 1rem;
+  }
+
+  .solucoes__button {
+    width: 95vw;
+  }
+
+  .solucoes__cred:nth-child(3) {
+    height: 35vh;
+  }
+
+  #futuro {
+    height: 210vh;
+  }
+
+  .missaoVisaoValores {
+    flex-direction: column;
+    height: 250vh;
+  }
+
+  .futuro__titulo {
+    margin-top: 5vh;
+  }
+
+  .futuro__conteudo {
+    font-size: 2rem;
+    margin-left: 1vh;
+  }
+
+  .missaoVisaoValores>.missaoVisaoValores__card {
+    width: 90vw;
+    height: 65vh;
+    margin-bottom: 5vh;
+    margin-left: 1vh;
+  }
+
+  .missaoVisaoValores__card:nth-child(1) {
+    margin-top: 5vh;
+    height: 50vh;
+  }
+
+  #localizacao {
+    margin-top: 20vh;
+  }
+}

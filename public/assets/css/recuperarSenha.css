@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,900&display=swap');
+
+
+
+body {
+  background-color: var(--brancoClaro);
+  font-family: 'Nato', sans-serif;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  background-color: var(--verdeClaro);
+  display: flex;
+  flex-direction: column;
+  margin: 10vh 10vw 0 10vw;
+  border-radius: 30px;
+  width: 60vw;
+  height: 70vh;
+  padding: auto;
+}
+
+main h2 {
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 10vh 0 5vh 0;
+  color: var(--brancoClaro);
+  font-weight: bold;
+}
+
+.e-mail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.e-mail>label {
+  font-size: 2.2em;
+  margin-bottom: 2vh;
+  color: var(--brancoClaro);
+  outline: none;
+}
+
+#recuperar {
+  width: 50vw;
+  height: 7vh;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--brancoClaro);
+  margin-bottom: 3vh;
+  text-align: center;
+  font-size: 1.6em;
+  align-items: center;
+  margin-top: 2vh;
+  outline: none;
+}
+
+.submit input {
+  height: 7vh;
+  width: 40vw;
+  background-color: #414040;
+  color: var(--brancoClaro);
+  border: none;
+  border-radius: 20px;
+  margin-left: 6vw;
+  margin-top: 2vh;
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+}
+
+span {
+  font-weight: bold;
+  color: var(--preto);
+}
+
+.submit {
+  text-align: center;
+  height: 10vh;
+  margin: 5vh 0 10vh 0;
+}
+
+.submit input:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+
+  .card {
+    width: 80vw;
+    height: 60vh;
+  }
+
+  .card>h2 {
+    font-size: 2rem;
+  }
+
+  .e-mail>label {
+    font-size: 1rem;
+    margin-bottom: 0px;
+  }
+
+  .submit input {
+    width: 60vw;
+  }
+
+}

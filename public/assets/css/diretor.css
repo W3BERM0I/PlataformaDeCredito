@@ -1,0 +1,8 @@
+.form-gestor {
+  display: flex;
+}
+
+.form-gestor>select {
+  width: 40%;
+  margin-right: 1vw;
+}
