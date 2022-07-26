@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('emprestimo/salvar', [EmprestimoController::class, 'store']);
     Route::post('/emprestimo/{id}', [EmprestimoController::class, 'destroy'])->name('emprestimo.destroy');
     Route::get('cliente', [ClienteController::class, 'show'])->name('cliente.index');
-    Route::post('cliente', [ClienteController::class, 'edit'])->name('atualiza.cliente');
+    Route::put('cliente', [ClienteController::class, 'edit'])->name('atualiza.cliente');
     Route::get('diretor', [DiretorController::class, 'index'])->name('diretor.index');
     Route::put('diretor', [DiretorController::class, 'promoverUser'])->name('diretor.promover');
     Route::get('gestor', [GestorController::class, 'index'])->name('gestor.index');

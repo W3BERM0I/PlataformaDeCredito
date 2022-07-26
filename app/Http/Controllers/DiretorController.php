@@ -16,7 +16,7 @@ class DiretorController extends Controller
     public function index()
     {
         if (Auth::user()->tipo_usuario !== "DIRETOR") {
-            return view('home');
+            return to_route('home');
         }
         $usuarios = $this->repository->all();
         return view('diretor.index', ['usuarios' => $usuarios]);

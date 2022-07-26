@@ -67,8 +67,8 @@ class ClienteController extends Controller
      */
     public function edit(Request $request)
     {
-        $cliente = $this->repository->alteraUsuario($request);
-        to_route('cliente', 302);
+        $this->repository->alteraUsuario($request);
+        to_route('home');
     }
 
     /**

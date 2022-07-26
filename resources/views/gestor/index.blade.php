@@ -36,9 +36,13 @@
           </td>
         </tr>
         @endforeach
+
         </form>
       </tbody>
     </table>
+    @if (count($emprestimos) == 0)
+    <h2>Não ha emprestimos para serem analizados</h2>
+    @endif
   </div>
 </main>
 @endsection

@@ -9,6 +9,7 @@
 </div>
 <form action="{{ route('atualiza.cliente') }}" method="post">
   @csrf
+  @method('PUT')
   <div class="form">
     <aside>
       <div class="form-cadastro nome_completo">
@@ -62,22 +63,22 @@
           <input type="checkbox" id="cbNome" name="nome" onclick="EstadoEmail(this)" /> Alterar
         </div>
       </div>
+      <div class="form-cadastro">
+        <label for="senha" class="input-label">Senha atual</label>
+        <input type="password" name="senha" id="senha" class="input senha" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="senha" required />
+      </div>
   </div>
   <div class="form-checkbox">
     <input type="checkbox" id="cbNome" name="nome" onclick="EstadoSenha(this)" /> Alterar Senha
   </div>
   <div id="senhas">
     <div class="form-cadastro">
-      <label for="senha" class="input-label">Senha atual</label>
-      <input type="password" name="senha" id="senha" class="input senha" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="senha" required />
-    </div>
-    <div class="form-cadastro">
       <label for="senha" class="input-label">Nova senha</label>
-      <input type="password" name="senha" id="senha" class="input senha" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="senha" required />
+      <input type="password" name="senha" id="senha" class="input senha" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="senha" />
     </div>
     <div class="form-cadastro confirmar_senha">
       <label for="senha" class="input-label">Confirme a nova senha</label>
-      <input type="password" id="senha" class="input senha" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="compararSenha" required />
+      <input type="password" id="senha" class="input senha" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="compararSenha" />
     </div>
   </div>
   </aside>

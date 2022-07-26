@@ -1,5 +1,5 @@
 .footer {
-  height: 40vh;
+  height: 20vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -8,17 +8,17 @@
   background-color: var(--preto);
 }
 
-.info {
+.info-footer {
   display: flex;
   flex-direction: column;
 }
 
-.info>p {
+.info-footer>p {
   text-align: center;
   align-items: right;
   color: var(--brancoClaro);
 }
 
-.info>p:nth-of-type(2) {
+.info-footer>p:nth-of-type(2) {
   margin-bottom: 2vh;
 }

@@ -9,12 +9,11 @@
 
 main {
   height: 50vh;
-  display: flex;
   flex-direction: column;
 }
 
+
 .lista__emprestimos {
-  display: flex;
   flex-direction: column;
 }
 

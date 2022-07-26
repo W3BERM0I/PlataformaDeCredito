@@ -43,7 +43,7 @@
       </div>
     </div>
     @endif
-    @if (Auth::user()->tipo_usuario == "GESTOR")
+    @if (Auth::user()->tipo_usuario == "GESTOR" || Auth::user()->tipo_usuario == "DIRETOR")
     <div class="card">
       <div class="card-body">
         <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-coin rounded mx-auto d-block" viewBox="0 0 16 16">

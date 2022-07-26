@@ -36,6 +36,9 @@
           </form>
         </tbody>
       </table>
+      @if (count($emprestimos) == 0)
+      <h2>Não ha emprestimos para serem ixibidos</h2>
+      @endif
       <div class="c">
         <div class="cria_emprestimos"><a class="bnovo" href="{{route('emprestimo.create')}}">Solicitar emprestimo</a></div>
       </div>
