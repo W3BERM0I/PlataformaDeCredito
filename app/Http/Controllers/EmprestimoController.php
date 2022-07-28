@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Emprestimo;
 use App\Repositories\EmprestimoRepository;
 use App\Repositories\ParcelaRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmprestimoController extends Controller
 {
@@ -21,7 +21,18 @@ class EmprestimoController extends Controller
     public function index()
     {
         $emprestimos = $this->repository->listaEmprestimos();
+        if (Auth::user()->tipo_usuario == 'GESTOR' || Auth::user()->tipo_usuario == 'DIRETOR')
+            $emprestimos = $this->repository->all();
         return view('emprestimo.index')->with('emprestimos', $emprestimos);
+    }
+
+    public function search(Request $request)
+    {
+        $emprestimos = $this->repository->FiltroDeEmprestimo($request->search);
+        if (is_null($emprestimos)) {
+            $emprestimos = $this->repository->all();
+        }
+        return view('emprestimo.index', ['emprestimos' => $emprestimos]);
     }
 
     /**

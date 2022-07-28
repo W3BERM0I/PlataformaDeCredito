@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Repositories\ClienteRepository;
+use App\Repositories\ParcelaRepository;
+use DomainException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class ClienteController extends Controller
 {
 
-    public function __construct(private ClienteRepository $repository)
+    public function __construct(private ClienteRepository $repository, private ParcelaRepository $parcelaRepository)
     {
     }
 
@@ -65,6 +67,17 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function pagarParcela(int $id)
+    {
+        try {
+            $this->parcelaRepository->pagarParcela($id);
+        } catch (DomainException $e) {
+            return to_route('home');
+        }
+        return to_route('emprestimo.index');
+    }
+
     public function edit(Request $request)
     {
         $this->repository->alteraUsuario($request);

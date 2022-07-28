@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Cliente;
 use App\Models\Emprestimo;
 use App\Models\Parcela;
 use Illuminate\Http\Request;
@@ -30,9 +31,19 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
     return $emprestimo;
   }
 
+  public function all()
+  {
+    return Emprestimo::all();
+  }
+
   public function listaEmprestimos()
   {
     return (Emprestimo::whereCliente_id(session('id'))->get());
+  }
+
+  public function FiltroDeEmprestimo(mixed $filtro)
+  {
+    return  Emprestimo::where("id", "{$filtro}")->paginate();
   }
 
   public function buscaClientesEmprestimosSolicitados(): array
@@ -47,12 +58,26 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
 
   public function buscaEmprestimosSolicitados()
   {
-    return Emprestimo::with('cliente')->whereStatus('SOLICITADO')->get();
+    $emprestimos = Emprestimo::with('cliente')->whereStatus('SOLICITADO')->get();
+    foreach ($emprestimos as $emprestimo) {
+      $emprestimo->data_solicitacao = $this->inverteData($emprestimo->data_solicitacao);
+    }
+    return $emprestimos;
   }
 
   public function buscaEmprestimoPorId(int $id)
   {
-    return Emprestimo::with('cliente')->whereId($id)->first();
+    $emprestimo = Emprestimo::with('cliente')->whereId($id)->first();
+    $emprestimo->data_solicitacao = $this->inverteData($emprestimo->data_solicitacao);
+    return $emprestimo;
+  }
+
+  public function inverteData($data)
+  {
+    // dd($data);
+    $data = explode("-", $data);
+    $data = $data[2] . "-" . $data[1] . "-" . $data[0];
+    return $data;
   }
 
   public function aprovaEmprestimo(int $id, float $juros): void

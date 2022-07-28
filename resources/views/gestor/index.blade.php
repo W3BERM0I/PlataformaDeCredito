@@ -27,7 +27,7 @@
           <th scope="row">{{$emprestimo->id}}</th>
           <td>R$ {{number_format($emprestimo->valor, 2, ',', '.')}}</td>
           <td>{{$emprestimo->parcelas}}</td>
-          <td>{{$emprestimo->taxa_juros}}</td>
+          <td>{{$emprestimo->taxa_juros}} %</td>
           <td>{{$emprestimo->status}}</td>
           <td>{{$emprestimo->cliente->nome}}</td>
 

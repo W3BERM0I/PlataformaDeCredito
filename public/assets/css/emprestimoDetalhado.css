@@ -1,12 +1,23 @@
 main {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  background-color: var(--brancoEscuro);
 }
+
+.emprestimo-asides {
+  height: 100%;
+  display: flex;
+}
+
+aside {
+  display: flex;
+  height: 100%;
+}
+
 
 #right {
   width: 50vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,11 +35,16 @@ main {
 
 #left {
   width: 50vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 17vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
   background-color: var(--brancoEscuro);
+}
+
+.btn-cancelar {
+  margin-bottom: 2vh;
 }

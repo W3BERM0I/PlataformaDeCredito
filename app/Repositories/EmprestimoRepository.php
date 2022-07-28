@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 interface EmprestimoRepository
 {
   public function add(Request $request): Emprestimo;
+  public function all();
   public function listaEmprestimos();
+  public function FiltroDeEmprestimo(mixed $filtro);
   public function buscaClientesEmprestimosSolicitados(): array;
   public function buscaEmprestimosSolicitados();
   public function buscaEmprestimoPorId(int $id);

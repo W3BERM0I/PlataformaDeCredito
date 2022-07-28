@@ -15,15 +15,16 @@ class DiretorController extends Controller
 
     public function index()
     {
-        if (Auth::user()->tipo_usuario !== "DIRETOR") {
-            return to_route('home');
-        }
+        if (Auth::user()->tipo_usuario !== "DIRETOR")
+            return back();
         $usuarios = $this->repository->all();
         return view('diretor.index', ['usuarios' => $usuarios]);
     }
 
     public function promoverUser(Request $request)
     {
+        if (Auth::user()->tipo_usuario !== "DIRETOR")
+            return back();
         Cliente::whereId($request->id)->update(['tipo_usuario' => $request->tipo_usuario]);
         return to_route('diretor.index');
     }

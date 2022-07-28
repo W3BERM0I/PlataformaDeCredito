@@ -31,35 +31,54 @@ class EloquentParcelaRepository implements ParcelaRepository
     DB::commit();
   }
 
-  public function pagarParcela(Request $request)
+  public function pagarParcela(int $id)
   {
-    $parcela = Parcela::whereId($request->id);
+    $parcela = Parcela::whereId($id)->first();
     try {
-      $this->analizaParcela($parcela);
+      $message = $this->analizaParcela($parcela);
     } catch (DomainException $e) {
       echo $e->getMessage();
       throw new DomainException();
     }
     $parcela->update(['status' => 'PAGA', 'data_pagamento' => new DateTimeImmutable()]);
+    return $message;
   }
 
   public function analizaParcela(Parcela $parcela)
   {
-    if ($parcela->data_vencimento < new DateTimeImmutable())
+    if ($parcela->data_vencimento >= new DateTimeImmutable())
       $parcela->update(['multa' => '2', 'valor' => ($parcela->valor * 1.02)]);
 
     $parcelas = $this->buscaParcelasPorEmprestimo($parcela->emprestimo_id);
+    if (($parcela->numero - 1) == 0)
+      return;
     foreach ($parcelas as $par) {
       if ($par->numero == ($parcela->numero - 1))
         $parcelaAnterior = $par;
     }
     if ($parcelaAnterior->status !== 'PAGA')
       throw new DomainException();
-    return $parcela;
+    return 'Sucesso';
   }
 
   public function buscaParcelasPorEmprestimo(int $id)
   {
-    return Parcela::with('emprestimo')->whereEmprestimo_id($id)->get();
+    $parcelas = Parcela::with('emprestimo')->whereEmprestimo_id($id)->get();
+    foreach ($parcelas as $parcela) {
+      $parcela->data_vencimento = $this->inverteData($parcela->data_vencimento);
+    }
+    return $parcelas;
+  }
+
+  public function inverteData($data)
+  {
+    $data = explode("-", $data);
+    $data = $data[2] . "-" . $data[1] . "-" . $data[0];
+    return $data;
+  }
+
+  public function parcelasPagas(int $id)
+  {
+    return Parcela::whereEmprestimo_id('$id')->whereStatus('PAGA')->select('count(numero)')->get();
   }
 }

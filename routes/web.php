@@ -47,10 +47,12 @@ Route::middleware('auth')->group(function () {
     Route::get('home', [PrincipalController::class, 'index'])->name('home');
     Route::get('deslogar', [LoginController::class, 'destroy'])->name('deslogar');
     Route::get('emprestimos', [EmprestimoController::class, 'index'])->name('emprestimo.index');
+    Route::post('emprestimos', [EmprestimoController::class, 'search'])->name('emprestimo.search');
     Route::get('emprestimo/criar', [EmprestimoController::class, 'create'])->name('emprestimo.create');
     Route::post('emprestimo/criar', [EmprestimoController::class, 'store'])->name('emprestimo.store');
     Route::get('/emprestimo/{id}', [EmprestimoController::class, 'show'])->name('emprestimo.show');
     Route::put('emprestimo/{id}', [EmprestimoController::class, 'cancelarSolicitacao'])->name('emprestimo.cancela');
+    Route::put('parcela/{id}', [ClienteController::class, 'pagarParcela'])->name('parcela.pagar');
     Route::post('emprestimo/salvar', [EmprestimoController::class, 'store']);
     Route::post('/emprestimo/{id}', [EmprestimoController::class, 'destroy'])->name('emprestimo.destroy');
     Route::get('cliente', [ClienteController::class, 'show'])->name('cliente.index');
