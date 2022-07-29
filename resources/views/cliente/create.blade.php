@@ -68,6 +68,14 @@
       </form>
     </div>
   </main>
+  <footer class="footer">
+    <div class="propaganda">
+    </div>
+    <div class="info-footer">
+      <p>Group CredEasy by Moisés Weber</p>
+      <p>© copyright</p>
+    </div>
+  </footer>
   <script src="/assets/js/cadastrar/mascaras.js"></script>
   <script src="/assets/js/cadastrar/app.js"></script>
   <script src="https://github.com/codermarcos/simple-mask-money/releases/download/v3.0.0/simple-mask-money.js"></script>

@@ -84,6 +84,14 @@
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1738.4095217407412!2d-51.11370988190172!3d-29.375587208048234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951eb3744efb0515%3A0xb7772dd429793ce8!2sSicredi%20Pioneira%20RS%20%7C%20Ag%C3%AAncia%20Empresarial!5e0!3m2!1spt-BR!2sbr!4v1647453176795!5m2!1spt-BR!2sbr" style="border:0;" allowfullscreen="" loading="lazy" class="map"></iframe>
     </div>
   </section>
+  <footer class="footer">
+    <div class="propaganda">
+    </div>
+    <div class="info-footer">
+      <p>Group CredEasy by Moisés Weber</p>
+      <p>© copyright</p>
+    </div>
+  </footer>
 </body>
 
 </html>
