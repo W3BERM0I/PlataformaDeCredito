@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -18,8 +15,6 @@ class LoginController extends Controller
 
     public function validaLogin(Request $request)
     {
-        // $senha = password_verify(string $request->password, string $hash);
-        // dd($request->only(['email', 'password']));
         if (!Auth::attempt($request->only(['email', 'password']))) {
             return redirect()->back();
         }

@@ -6,7 +6,6 @@ use App\Repositories\ClienteRepository;
 use App\Repositories\EmprestimoRepository;
 use App\Repositories\ParcelaRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class GestorController extends Controller
 {
@@ -16,8 +15,6 @@ class GestorController extends Controller
 
     public function index()
     {
-        // if (Auth::user()->tipo_usuario !== "GESTOR" || Auth::user()->tipo_usuario !== "DIRETOR")
-        //     return back();
         $emprestimos = $this->emprestimoRepository->buscaEmprestimosSolicitados();
         return view('gestor.index', ['emprestimos' => $emprestimos]);
     }
