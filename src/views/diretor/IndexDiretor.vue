@@ -1,0 +1,74 @@
+<template>
+ <main>
+    <div class="lista_emprestimos">
+      <div class="titulo">
+        <h1>Usuarios</h1>
+      </div>
+      <table class="table table-borderless">
+        <thead class="tbhead">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">nome</th>
+            <th scope="col">Renda</th>
+            <th scope="col">CPF</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">Atualizar status para</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.nome}}</td>
+            <td>R$ {{user.renda}}</td>
+            <td>{{user.cpf}}</td>
+            <td>{{user.tipo_usuario}}</td>
+            <td>
+              <Form @submit.prevent="alteraTipoGestor()" method="POST">
+                <div class="form-gestor">
+                  <select class="form-select" name="tipo_usuario" aria-label="Default select example" id="tipo_usuario" required>
+                    <option value="COMUN">Comun</option>
+                    <option value="GESTOR">Gestor</option>
+                    <option value="DIRETOR">Diretor</option>
+                  </select>
+                  <input type="text" name="id" style="display: none;" value="">
+                  <button class="btn btn-success" type="submit">Atualizar</button>
+                </div>
+              </Form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</template>
+
+<script>
+  import User from '../../domain/User';
+
+  export default {
+    data() {
+      return {
+        user: new User()
+      }
+    }
+  };
+
+  function alteraTipoGestor(tipo) {
+    user.tipo_usuario = tipo;
+  }
+</script>
+
+<style scoped>
+  main {
+  min-height: 80vh;
+}
+
+.form-gestor {
+  display: flex;
+}
+
+.form-gestor>select {
+  width: 40%;
+  margin-right: 1vw;
+}
+</style>
