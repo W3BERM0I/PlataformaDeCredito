@@ -6,6 +6,7 @@ import diretor from '../views/diretor/IndexDiretor.vue';
 import index from '../views/index.vue'
 import indexGestor from '../views/gestor/IndexGestor.vue'
 import entrar from '../views/login/index.vue'
+import cadastrar from '../views/user/create.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/entrar',
       name: 'Entrar',
       component: entrar
+     },
+     {
+      path: '/cadastrar',
+      name: 'Cadastrar',
+      component: cadastrar
      }
   ]
 })

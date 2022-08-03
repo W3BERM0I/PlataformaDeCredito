@@ -29,6 +29,19 @@
   </main>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+      }
+    },
+    methods: {
+      emitLogado() {
+        this.$emit('logado', 'false');
+      }
+    }
+  }
+</script>
 
 <style scoped>
 .cabecalhoPrincipal {
@@ -78,8 +91,9 @@ header {
 main {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   align-items: center;
+  margin-top: 5%;
 }
 
 section {
@@ -123,8 +137,8 @@ form {
   flex-direction: column;
   justify-content: center;
   background-color: var(--verdeClaro);
-  width: 25vw;
-  height: 62vh;
+  width: 30vw;
+  max-height: 70vh;
   align-items: center;
   border-radius: 50px;
   padding: 2em 1em 2em 1em;
@@ -193,7 +207,7 @@ form {
   color: var(--brancoEscuro);
   font-style: none;
   text-decoration: none;
-  margin-top: 2vh;
+  margin: 0 0 2vh 0;
   font-weight: 400;
   font-size: 1.3em;
 }
