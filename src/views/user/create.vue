@@ -11,7 +11,7 @@
         </div>
         <div class="form-cadastro">
           <label for="cpf" class="input-label">cpf</label>
-          <input type="text" id="cpf" class="input" name="cpf" data-tipo="cpf" autocomplete="off" maxlength="14" onkeyup="mascara_cpf()" required />
+          <input type="text" id="cpf" class="input" name="cpf" autocomplete="off" maxlength="14" onkeyup="mascara_cpf()" required />
         </div>
         <div class="form-cadastro">
           <label for="telefone">telefone</label>

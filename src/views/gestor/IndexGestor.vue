@@ -4,7 +4,6 @@
     <div class="titulo">
       <h1>Emprestimos solicitados</h1>
     </div>
-
     <table class="table table-borderless">
       <thead class="tbhead">
         <tr>
@@ -18,16 +17,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(emprestimo, index) in emprestimos" :key="index">
+        <tr v-for="(emprestimo, index) in TodosEmprestimos" :key="index">
           <th scope="row">{{emprestimo.id}}</th>
           <td>R$ {{emprestimo.valor}}</td>
           <td>{{emprestimo.parcelas}}</td>
           <td>{{emprestimo.taxa_juros}} %</td>
           <td>{{emprestimo.status}}</td>
-          <td>{{emprestimo.cliente}}</td>
+          <td>{{emprestimo.cliente.nome}}</td>
 
           <td>
-            <a href="" class="btn btn-secondary bo">Saiba mais</a>
+            <router-link to="" class="btn btn-secondary bo">Saiba mais</router-link>
           </td>
         </tr>
       </tbody>
@@ -37,14 +36,26 @@
 </main>
 </template>
 
+<script setup>
+
+import { ref } from 'vue';
+import api from '../../services/api'
+
+  const TodosEmprestimos = ref([]);
+  api.get('listaEmprestimosSolicitados').then((res) => {
+    TodosEmprestimos.value = res.data;
+  });
+</script>
+
 <script>
-  import Emprestimo from '../../domain/Emprestimo';
 
   export default {
     data() {
       return {
-        emprestimos: [new Emprestimo()]
       }
+    },
+    setup() {
+     
     }
   }
 </script>

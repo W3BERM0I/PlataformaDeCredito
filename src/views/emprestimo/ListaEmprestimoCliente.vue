@@ -18,17 +18,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <!-- v-for="emprestimo in emprestimos" :key="emprestimo" -->
+            <tr v-for="(emprestimo, index) in EmprestimosCliente" :key="index">
               <th scope="row">{{ emprestimo.id }}</th>
               <td>R$ {{ emprestimo.valor }}</td>
-              <td>{{ emprestimo.qtd_parcelas }}</td>
+              <td>{{ emprestimo.parcelas }}</td>
               <td>{{ emprestimo.taxa_juros}} %</td>
               <td>{{ emprestimo.status}}</td>
-              <td>{{ emprestimo.cliente_id}}</td>
+              <td>{{ emprestimo.cliente.nome}}</td>
 
               <td>
-                <a href="" class="btn btn-secondary bo">Saiba mais</a>
+                <router-link to="" class="btn btn-secondary bo">Saiba mais</router-link>
               </td>
             </tr>
           </tbody>
@@ -38,8 +37,20 @@
     </main>
 </template>
 
+<script setup>
+  import api from '../../services/api'
+  import { ref } from 'vue';
+
+  const EmprestimosCliente = ref([]);
+  api.get('emprestimo/cliente').then((res) => {
+     EmprestimosCliente.value = res.data;
+  });
+
+</script>
+
 <script>
   import Emprestimo from '../../domain/Emprestimo';
+
 
   export default {
     data() {

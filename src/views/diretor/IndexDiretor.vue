@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-for="(user, index) in users" :key="index">
             <th scope="row">{{user.id}}</th>
             <td>{{user.nome}}</td>
             <td>R$ {{user.renda}}</td>
@@ -42,13 +42,22 @@
   </main>
 </template>
 
-<script>
-  import User from '../../domain/User';
+<script setup>
+import api from '../../services/api';
+import { ref } from 'vue';
 
-  export default {
+const users = ref([]);
+api.get('usuarios').then((res) => {
+  users.value = res.data;
+})
+
+</script>
+
+<script>
+ 
+ export default {
     data() {
       return {
-        user: new User()
       }
     }
   };

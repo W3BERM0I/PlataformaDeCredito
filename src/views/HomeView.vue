@@ -8,7 +8,7 @@
         </svg>
         <h5 class="card-title">Lista de emprestimos</h5>
         <p class="card-text">Acesse por aqui os emprestimos</p>
-        <a href="/ListaEmprestimos" class="btn btn-primary" id="btn-style">Saiba mais</a>
+        <router-link to="/ListaEmprestimos" class="btn btn-primary" id="btn-style">Saiba mais</router-link>
       </div>
     </div>
     <div class="card">
@@ -18,7 +18,7 @@
         </svg>
         <h5 class="card-title">Solicitar emprestimo</h5>
         <p class="card-text">Solicite um emprestimo para chegar mais perto do seu sonho</p>
-        <a href="/CriaEmprestimo" class="btn btn-primary btn-style" id="btn-style">Saiba mais</a>
+        <router-link to="/CriaEmprestimo" class="btn btn-primary btn-style" id="btn-style">Saiba mais</router-link>
       </div>
     </div>
     <div class="card">
@@ -28,7 +28,7 @@
         </svg>
         <h5 class="card-title">Ações gestor</h5>
         <p class="card-text">Gerencie os emprestimos por aqui</p>
-        <a href="/IndexGestor" class="btn btn-primary" id="btn-style">Acessar</a>
+        <router-link to="/IndexGestor" class="btn btn-primary" id="btn-style">Acessar</router-link>
       </div>
     </div>
     <div class="card">
@@ -38,7 +38,7 @@
         </svg>
         <h5 class="card-title">Ações Diretor</h5>
         <p class="card-text">Gerencie a sua equipe por aqui</p>
-        <a href="/AcoesDiretor" class="btn btn-primary" id="btn-style">Acessar</a>
+        <router-link to="/AcoesDiretor" class="btn btn-primary" id="btn-style">Acessar</router-link>
       </div>
     </div>
   </div>

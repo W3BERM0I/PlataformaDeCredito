@@ -1,16 +1,110 @@
 <template>
     <header class="cabecalhoPrincipal" id="principalHeader">
     <div class="container">
-      <h1><a href="/home">CredEasy</a></h1>
+      <h1><router-link to="/home">CredEasy</router-link></h1>
       <div class="dropdown" >
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
           Olá,
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><a class="dropdown-item" href="">Meu Perfil</a></li>
-          <li><a class="dropdown-item" href="">Sair</a></li>
+          <li><router-link class="dropdown-item" to="">Meu Perfil</router-link></li>
+          <li><router-link class="dropdown-item" to="">Sair</router-link></li>
         </ul>
       </div>
     </div>
   </header> 
 </template>
+
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,900&display=swap');
+
+.cabecalhoPrincipal .container {
+  max-width: 100%;
+  width: 100vw;
+  height: 12vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Lato';
+  background-color: var(--verdeClaro);
+}
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 0;
+}
+
+.container>nav {
+  display: flex;
+  padding: 2vw;
+}
+
+.container>h1 {
+  margin: 1vh 0 1vh 2vw;
+  font-style: none;
+  border-style: none;
+}
+
+.container>h1>a {
+  width: 3.5vw;
+  height: 3.5vh;
+  padding: 0.4rem;
+  color: var(--brancoClaro);
+  font-style: none;
+  text-decoration: none;
+  font-size: 2.2rem;
+  font-weight: 700;
+  border: 0.2rem solid var(--brancoClaro);
+  border-radius: 100px;
+
+}
+
+.container>h1>a:hover {
+  background-color: var(--verdeClaro);
+  color: var(--brancoClaro);
+}
+
+.container__item {
+  padding: 1vw;
+  margin-right: .25vw;
+  font-style: none;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: var(--brancoClaro);
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.container__item:nth-last-of-type(1) {
+  margin-right: 2vw;
+}
+
+.container__item:hover {
+  color: var(--verdeClaro);
+  transform: 1s;
+}
+
+#dropdownMenu2 {
+  color: var(--verdeClaro);
+  background-color: var(--brancoEscuro);
+  margin-right: 2vw;
+  border: 2px solid var(--verdeClaro);
+  border-radius: 20%;
+}
+
+@media screen and (max-width: 768px) {
+  .container>h1>a {
+    font-size: 1.5rem;
+  }
+
+  .container__item {
+    font-size: 1.5rem;
+  }
+}
+</style>

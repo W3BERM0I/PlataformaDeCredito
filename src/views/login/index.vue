@@ -22,8 +22,8 @@
           </div>
           <div class="textfield"><button class="btn-login">Login</button></div>
         </form>
-        <a href="/recuperar-senha">Esqueci minha senha</a>
-        <a href="/cadastrar">Sou novo aqui</a>
+        <router-link to="/recuperar-senha">Esqueci minha senha</router-link>
+        <router-link to="/cadastrar">Sou novo aqui</router-link>
       </div>
     </section>
   </main>
