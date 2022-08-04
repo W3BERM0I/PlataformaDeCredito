@@ -41,6 +41,11 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
     return (Emprestimo::whereCliente_id(session('id'))->get());
   }
 
+  public function listaEmprestimosIdCliente(int $i)
+  {
+    return (Emprestimo::whereCliente_id($i)->get());
+  }
+
   public function FiltroDeEmprestimo(mixed $filtro)
   {
     return  Emprestimo::where("id", "{$filtro}")->paginate();
@@ -74,7 +79,6 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
 
   public function inverteData($data)
   {
-    // dd($data);
     $data = explode("-", $data);
     $data = $data[2] . "-" . $data[1] . "-" . $data[0];
     return $data;

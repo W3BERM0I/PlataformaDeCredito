@@ -10,6 +10,7 @@ interface EmprestimoRepository
   public function add(Request $request): Emprestimo;
   public function all();
   public function listaEmprestimos();
+  public function listaEmprestimosIdCliente(int $i);
   public function FiltroDeEmprestimo(mixed $filtro);
   public function buscaClientesEmprestimosSolicitados(): array;
   public function buscaEmprestimosSolicitados();
