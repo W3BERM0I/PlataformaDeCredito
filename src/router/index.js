@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import home from '../views/HomeView.vue'
 import criarEmprestimo from '../views/emprestimo/CriarEmprestimo.vue'
 import emprestimosCliente from '../views/emprestimo/ListaEmprestimoCliente.vue'
+import emprestimo from '../views/emprestimo/Emprestimo.vue'
 import diretor from '../views/diretor/IndexDiretor.vue';
 import index from '../views/index.vue'
 import indexGestor from '../views/gestor/IndexGestor.vue'
@@ -30,6 +31,11 @@ const router = createRouter({
        path: '/ListaEmprestimos',
        name: 'ListaEmprestimos',
        component: emprestimosCliente
+     },
+     {
+       path: '/Emprestimo/:id',
+       name: 'Emprestimo',
+       component: emprestimo
      },
      {
        path: '/AcoesDiretor',

@@ -32,19 +32,25 @@
             </tr>
           </tbody>
         </table>
-        <h2>Não ha emprestimos para serem analizados</h2>
+      <h2 v-if="semEmprestimos">Não ha emprestimos para serem analizados</h2>
+       <div class="c">
+        <div class="cria_emprestimos"><router-link class="bnovo" to="CriaEmprestimo">Solicitar emprestimo</router-link ></div>
+      </div>
       </div>
     </main>
 </template>
 
 <script setup>
   import api from '../../services/api'
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
+  
 
   const EmprestimosCliente = ref([]);
   api.get('emprestimo/cliente').then((res) => {
      EmprestimosCliente.value = res.data;
   });
+
+  const semEmprestimos = computed(() => EmprestimosCliente.value.length == 0);
 
 </script>
 
@@ -127,6 +133,7 @@ td {
   cursor: pointer;
   box-shadow: 0px 10px 40px -12px var(--preto);
   display: flex;
+  align-items: center;
 }
 
 .bnovo {

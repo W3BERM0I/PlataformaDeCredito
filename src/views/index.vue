@@ -186,22 +186,11 @@ main {
   .caixa__texto {
     font-size: 1.3rem;
   }
-
-  
-  .solucoes {
-    display: flex;
-    flex-direction: column;
-    min-height: 60vh;
-  }
-
   .solucoes>.solucoes__cred {
     height: 45vh;
     width: 95vw;
     justify-content: flex-end;
   }
-
-  
-
 
   #futuro {
     min-height: 100vh;

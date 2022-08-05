@@ -29,7 +29,7 @@ export default {
 .solucoes__cred {
   background-color: var(--brancoClaro);
   color: var(--preto);
-  min-height: 60vh;
+  min-height: 50vh;
   width: 29%;
   margin: 5vh 0.5vw 0vh;
   border-radius: 25px;

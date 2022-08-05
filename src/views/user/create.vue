@@ -49,6 +49,7 @@
   </main>
 </template>
 
+
 <style scoped>
   body {
   background-color: var(--brancoClaro);
