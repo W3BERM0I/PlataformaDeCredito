@@ -14,7 +14,7 @@
 <body>
   <header class="cabecalhoPrincipal">
     <div class="container">
-      <h1><a href="primeira-tela">CredEasy</a></h1>
+      <h1><a href="{{back()}}">CredEasy</a></h1>
       <nav>
         <a class="container__item" href="#futuro">Sobre</a>
         <a class="container__item" href="#localizacao">Localização</a>
