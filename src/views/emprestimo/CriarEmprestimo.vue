@@ -9,8 +9,8 @@
       <h3>Solicitar Emprestimo</h3>
       <form class="form-list" action="" method="post">
         <div class="mb-3 inputs">
-          <label for="formGroupExampleInput" class="form-label labels" id="valor">Valor a ser solicitado</label>
-          <input type="text" class="form-control input" id="myInput" name="valor" placeholder="Informe o valor a ser solicitado" data-tipo="valor" value="1000" inputmode="numeric" required />
+          <label for="valor" class="form-label labels" id="valor">Valor a ser solicitado</label>
+          <input type="text" class="form-control input" id="myInput" name="valor" inputmode="numeric" v-model="emprestimo.valor" v-mask-decimal.br="2" required />
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput" class="form-label labels" id="valor">Quantidade de parcelas</label>
@@ -25,7 +25,15 @@
   </main>
 </template>
 
-
+<script>
+export default {
+  data() {
+    return {
+      emprestimo: {valor: '100000', qtdParcela: ''}
+    }
+  }
+}
+</script>
 
 <style scoped>
   

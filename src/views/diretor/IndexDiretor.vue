@@ -68,8 +68,15 @@ api.get('usuarios').then((res) => {
 </script>
 
 <style scoped>
-  main {
+main {
   min-height: 80vh;
+}
+
+.titulo {
+  text-align: center;
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--cinza)
 }
 
 .form-gestor {

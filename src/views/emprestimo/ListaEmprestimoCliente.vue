@@ -68,7 +68,7 @@
 </script>
 
 <style scoped>
-    .principal {
+  .principal {
   height: 80vh;
   width: 100vw;
   display: flex;
@@ -109,6 +109,8 @@ main {
   align-items: center;
   color: var(--verdeClaro);
   padding: 1%;
+  font-size: 35px;
+  font-weight: 700;
 }
 
 .tbhead {
@@ -126,24 +128,24 @@ td {
 
 .cria_emprestimos {
   width: 15%;
-  padding: .5em 0px;
   margin-top: 1.9em;
   border-radius: 8px;
   background-color: var(--verdeClaro);
   cursor: pointer;
   box-shadow: 0px 10px 40px -12px var(--preto);
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .bnovo {
   text-decoration: none;
+  text-align: center;
   color: var(--cinzaEscuro);
   font-weight: 700;
   justify-content: center;
   align-items: center;
-  padding-left: 3vw;
   width: 10vw;
+  padding: 12px;
 }
 
 .bnovo:hover {
@@ -152,7 +154,6 @@ td {
 
 .c {
   display: flex;
-  align-items: flex-end;
   justify-content: flex-end;
   margin-right: 5vw;
   margin-bottom: 5vh;

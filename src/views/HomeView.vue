@@ -92,12 +92,15 @@
 
 @media screen and (max-width: 768px) {
   .principal {
+    display: flex;
+    min-height: 250vh;
     flex-direction: column;
-    height: 170vh;
+
   }
 
   .card-body {
     width: 95vw;
+    height: auto;
   }
 }
 </style>

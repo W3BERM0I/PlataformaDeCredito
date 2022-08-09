@@ -31,20 +31,21 @@
         </tr>
       </tbody>
     </table>
-    <h2>Não ha emprestimos para serem analizados</h2>
+    <h2 v-if="semEmprestimos">Não ha emprestimos para serem analizados</h2>
   </div>
 </main>
 </template>
 
 <script setup>
-
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import api from '../../services/api'
 
   const TodosEmprestimos = ref([]);
   api.get('listaEmprestimosSolicitados').then((res) => {
     TodosEmprestimos.value = res.data;
   });
+
+  const semEmprestimos = computed(() => TodosEmprestimos.value.length == 0);
 </script>
 
 <script>
@@ -102,6 +103,7 @@ h1 {
 .titulo {
   font-weight: 700;
   font-size: 1.8rem;
+  text-align: center;
   margin: 0;
   color: var(--cinza);
 }

@@ -2,26 +2,48 @@
     <header class="cabecalhoPrincipal" id="principalHeader">
     <div class="container">
       <h1><router-link to="/home">CredEasy</router-link></h1>
-      <div class="dropdown" >
+      <div class="dropdown"  v-if="usuarioestaLogado">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Olá,
+          Olá, {{ nomeCliente }}
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <li><router-link class="dropdown-item" to="">Meu Perfil</router-link></li>
-          <li><router-link class="dropdown-item" to="">Sair</router-link></li>
+          <li><a class="dropdown-item" href="#" @click.prevent="efetuarLogout">Sair</a></li>
         </ul>
       </div>
+       <div v-show="!usuarioestaLogado"> <router-link to="entrar" class="entrar-link">Entrar</router-link></div>
     </div>
   </header> 
 </template>
 
+<script>
+import api from '../../../services/api'
+export default {
+  methods: {
+    efetuarLogout () {
+      this.$store.commit('DESLOGAR_USUARIO')
+      api.get('deslogar');
+      this.$router.push({ name: 'Entrar'})
+
+    }
+  },
+  computed: {
+    usuarioestaLogado () {
+      return Boolean(this.$store.state.token)
+    },
+    nomeCliente () {
+      return this.$store.state.usuario.nome
+    }
+  }
+}
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,700;1,900&display=swap');
 
 .cabecalhoPrincipal .container {
   max-width: 100%;
-  width: 100vw;
+  width: 100%;
   height: 12vh;
   display: flex;
   justify-content: space-between;
@@ -68,6 +90,12 @@
   background-color: var(--verdeClaro);
   color: var(--brancoClaro);
 }
+  .entrar-link {
+    color: var(--brancoClaro);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 600;
+  }
 
 .container__item {
   padding: 1vw;

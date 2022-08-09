@@ -1,3 +1,5 @@
+
+
 <template>
   <main>
     <div class="info-cadastro">
@@ -7,19 +9,19 @@
       <form action="" method="post">
         <div class="form-cadastro nome_completo">
           <label for="nome" class="input-label">Nome completo</label>
-          <input type="text" id="nome" autofocus class="input" name="nome" minlength="10" maxlength="255" required />
+          <input type="text" id="nome" autofocus class="input" name="nome" v-model="user.nome" minlength="10" maxlength="255" required />
         </div>
         <div class="form-cadastro">
           <label for="cpf" class="input-label">cpf</label>
-          <input type="text" id="cpf" class="input" name="cpf" autocomplete="off" maxlength="14" onkeyup="mascara_cpf()" required />
+          <input type="text" id="cpf" class="input" name="cpf" autocomplete="off" maxlength="14" v-model="user.cpf" v-mask-cpf required />
         </div>
         <div class="form-cadastro">
           <label for="telefone">telefone</label>
-          <input type="text" id="telefone" name="telefone" class="input" maxlength="14" onkeydown="mascara_telefone()" required />
+          <input type="text" id="telefone" name="telefone" class="input" maxlength="15" v-model="user.telefone" v-mask-phone.br required />
         </div>
         <div class="form-cadastro">
           <label for="Endereço">Endereço</label>
-          <input type="text" id="endereco" name="endereco" class="input" maxlength="255" required />
+          <input type="text" id="endereco" name="endereco" v-model="user.endereco" class="input" maxlength="255" required />
         </div>
         <div class="form-cadastro">
           <label for="profissao">Profissão</label>
@@ -27,7 +29,7 @@
         </div>
         <div class="form-cadastro">
           <label for="renda">Renda</label>
-          <input type="text" id="renda" class="input" name="renda" data-tipo="preco" required />
+          <input type="text" id="renda" class="input" name="renda" v-model="user.renda" v-mask-decimal.br="2" data-tipo="preco" required />
         </div>
         <div class="form-cadastro">
           <label for="email">Email</label>
@@ -49,6 +51,18 @@
   </main>
 </template>
 
+
+<script>
+
+
+export default {
+  data() {
+    return {
+      user: {nome: "", cpf: "", telefone: "", endereco: "", profissao: "", renda: "", email: "", senha: "", confirmarSenha: ""}
+    }
+  }
+}
+</script>
 
 <style scoped>
   body {

@@ -11,16 +11,16 @@
 
       <div class="card-login">
         <h1>Entrar</h1>
-        <form action="" method="post">
+        <form @submit.prevent="efetuarLogin">
           <div class="textfield">
             <label for="email">E-mail</label>
-            <input type="email" name="email" placeholder="E-mail" id="email" required />
+            <input type="email" name="email" v-model="user.email" id="email" required />
           </div>
           <div class="textfield">
             <label for="password">Senha</label>
-            <input type="password" name="password" placeholder="Senha" required />
+            <input type="password" name="password" v-model="user.password" required />
           </div>
-          <div class="textfield"><button class="btn-login">Login</button></div>
+          <div class="textfield"><button @click.prevent="efetuarLogin" class="btn-login">Login</button></div>
         </form>
         <router-link to="/recuperar-senha">Esqueci minha senha</router-link>
         <router-link to="/cadastrar">Sou novo aqui</router-link>
@@ -30,14 +30,17 @@
 </template>
 
 <script>
+import api from '../../services/api'
+
   export default {
     data() {
       return {
+        user: {email: "", password: ""}
       }
     },
     methods: {
-      emitLogado() {
-        this.$emit('logado', 'false');
+      efetuarLogin(){
+        this.$store.dispatch("efetuarLogin", this.usuario).then(() => this.$router.push({ name: "Home" }));
       }
     }
   }
