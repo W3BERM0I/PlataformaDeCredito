@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Emprestimo;
 use App\Models\Parcela;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EloquentEmprestimoRepository implements EmprestimoRepository
@@ -16,7 +17,7 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
     $valor = $request->valor;
     $qtdParcelas = $request->qtdParcelas;
     $taxaJuros = 10;
-    $id = (int)(session('id'));
+    $id = Auth::user()->id;
     $valorTotal = (($valor * ($taxaJuros / 100)) * $qtdParcelas) + $valor;
     $emprestimo = Emprestimo::create([
       'valor' => $valor,

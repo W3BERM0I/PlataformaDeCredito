@@ -20,7 +20,6 @@ class User extends Authenticatable
 
     protected $primaryKey = 'id';
 
-    protected $table = "users";
 
     public $timestamps = false;
 
