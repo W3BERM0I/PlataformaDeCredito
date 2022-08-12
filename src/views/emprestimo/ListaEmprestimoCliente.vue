@@ -27,7 +27,7 @@
               <td>{{ emprestimo.cliente.nome}}</td>
 
               <td>
-                <router-link to="" class="btn btn-secondary bo">Saiba mais</router-link>
+                <router-link :to="'emprestimo/' + emprestimo.id" class="btn btn-secondary bo">Saiba mais</router-link>
               </td>
             </tr>
           </tbody>
@@ -44,7 +44,6 @@
   import api from '../../services/api'
   import { ref, computed } from 'vue';
   
-
   const EmprestimosCliente = ref([]);
   api.get('emprestimo/cliente').then((res) => {
      EmprestimosCliente.value = res.data;

@@ -11,8 +11,8 @@
             <th scope="col">nome</th>
             <th scope="col">Renda</th>
             <th scope="col">CPF</th>
-            <th scope="col">STATUS</th>
-            <th scope="col">Atualizar status para</th>
+            <th scope="col">TIPO USUARIO</th>
+            <th scope="col">ATUALIZAR CARGO</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
                     <option value="GESTOR">Gestor</option>
                     <option value="DIRETOR">Diretor</option>
                   </select>
-                  <input type="text" name="id" style="display: none;" value="">
+                  <input type="text" name="id" style="display: none;" value="index">
                   <button class="btn btn-success" type="submit">Atualizar</button>
                 </div>
               </Form>

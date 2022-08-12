@@ -11,7 +11,7 @@
 
       <div class="card-login">
         <h1>Entrar</h1>
-        <form @submit.prevent="efetuarLogin">
+        <form @submit.prevent="efetuarLogin" method="post">
           <div class="textfield">
             <label for="email">E-mail</label>
             <input type="email" name="email" v-model="user.email" id="email" required />
@@ -30,17 +30,24 @@
 </template>
 
 <script>
-import api from '../../services/api'
 
   export default {
     data() {
       return {
-        user: {email: "", password: ""}
+        user: {email: "", password: ""},
+        mensagemErro: ""
       }
     },
     methods: {
       efetuarLogin(){
-        this.$store.dispatch("efetuarLogin", this.usuario).then(() => this.$router.push({ name: "Home" }));
+        this.$store.dispatch("efetuarLogin", this.user).then(() =>{
+         this.$router.push({ name: "Home" })
+         this.mensagemErro = ''
+         }).catch( erro => {
+          if (erro.request.status === 401) {
+            this.mensagemErro = 'Login ou senha invalido(s)'
+          }
+        })
       }
     }
   }

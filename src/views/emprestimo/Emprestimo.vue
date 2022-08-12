@@ -1,21 +1,65 @@
 <template>
   <main>
+    <!-- <h3>{{ emprestimo.parcelas }}</h3> -->
     <section>
       <card class="emprestimo">
         <aside class="left aside-card">
           <h1 class="titulo">Emprestimo</h1>
           <div class="conteudo">
-            <p>ID: </p>
-            <p>VALOR: R$ 40.000,00</p>
+            <p class="emprestimo-campo">ID do emprestimo: {{ emprestimo.emprestimo.id }} </p>
+            <p class="emprestimo-campo">Valor: R$ {{ (emprestimo.emprestimo.valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</p>
+            <p class="emprestimo-campo">Taxa de Juros: {{ emprestimo.emprestimo.taxa_juros}}%</p>
+            <p class="emprestimo-campo">Data da Solicitação: {{ emprestimo.emprestimo.data_solicitacao}}</p>
+            <p class="emprestimo-campo">Quantidade de parcelas: {{ emprestimo.emprestimo.parcelas}}</p>
+            <p class="emprestimo-campo">Valor aproximado de cada parcela:R$ {{ (emprestimo.emprestimo.valor_pago / emprestimo.emprestimo.parcelas).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</p>
+            <p class="emprestimo-campo">Status: {{ emprestimo.emprestimo.status}}</p>
           </div>
         </aside>
         <aside class="right aside-card">
           <h2 class="titulo">Parcelas</h2>
+          <div class="conteudo"  >
+            <table class="table table-bordered table-striped table-hover">
+              <thead class="tbhead">
+                <tr class="">
+                  <th scope="col">numero</th>
+                  <th scope="col">valor</th>
+                  <th scope="col">Data de Vencimento</th>
+                  <th scope="col">Status</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="parcela in emprestimo.parcelas" :key="parcela.id">
+                  <th scope="row">{{parcela.numero}}</th>
+                  <td scope="row">R$ {{parcela.valor}}</td>
+                  <td scope="row">{{parcela.data_vencimento}}</td>
+                  <td scope="row">{{parcela.status}}</td>
+                  <td>
+                    <form>
+                      <button type="submit" class="btn btn-secondary bo" value="">Pagar</button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+             </table>
+          </div>
         </aside>
       </card>
     </section>
   </main>
 </template>
+
+<script setup>
+  import api from '../../services/api'
+  import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+  
+  const emprestimo = ref([]);
+  api.get('emprestimo/' + useRoute().params.id).then((res) => {
+     emprestimo.value = res.data;
+  });
+  console.log(emprestimo);
+</script>
 
 <style scoped>
   main {
@@ -40,6 +84,12 @@
     border: 1px solid var(--cinza);
   }
 
+  .emprestimo-campo {
+    min-height: 40px;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 3%;
+  }
   .aside-card{
     display: flex;
     flex-direction: column;

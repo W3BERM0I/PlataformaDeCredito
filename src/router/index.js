@@ -6,6 +6,7 @@ import emprestimo from '../views/emprestimo/Emprestimo.vue'
 import diretor from '../views/diretor/IndexDiretor.vue';
 import index from '../views/index.vue'
 import indexGestor from '../views/gestor/IndexGestor.vue'
+import showGestor from '../views/gestor/show.vue'
 import entrar from '../views/login/index.vue'
 import cadastrar from '../views/user/create.vue'
 
@@ -14,13 +15,16 @@ const router = createRouter({
   routes: [
     {
       path: '/home',
-      name: 'home',
+      name: 'Home',
       component: home
     },
     {
       path: '/',
-      name: 'index',
-      component: index
+      name: 'Index',
+      component: index,
+      meta: {
+        publica: true
+      }
     },
       {
         path: '/CriaEmprestimo',
@@ -30,12 +34,7 @@ const router = createRouter({
      {
        path: '/ListaEmprestimos',
        name: 'ListaEmprestimos',
-       component: emprestimosCliente
-     },
-     {
-       path: '/Emprestimo/:id',
-       name: 'Emprestimo',
-       component: emprestimo
+       component: emprestimosCliente,
      },
      {
        path: '/AcoesDiretor',
@@ -50,12 +49,28 @@ const router = createRouter({
      {
       path: '/entrar',
       name: 'Entrar',
-      component: entrar
+      component: entrar,
+      meta: {
+        publica: true
+      }
      },
      {
       path: '/cadastrar',
       name: 'Cadastrar',
-      component: cadastrar
+      component: cadastrar,
+      meta: {
+        publica: true
+      }
+     },
+     {
+       path: '/Emprestimo/:id',
+       name: 'Emprestimo',
+       component: emprestimo
+     },
+     {
+      path: '/analizar/emprestimo/:id',
+      name: 'ShowGestor',
+      component: showGestor
      }
   ]
 })

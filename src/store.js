@@ -1,16 +1,17 @@
 import { createStore } from 'vuex'
 import api from './services/api.js'
 
+
 const estado = {
-  token: 3,
+  token: null,
   usuario: {
-    nome: 'moises'
   }
 }
 
 const mutations = {
-  DEFINIR_USUARIO_LOGADO (state, { token }) {
+  DEFINIR_USUARIO_LOGADO (state, { token, usuario }) {
     state.token = token
+    state.usuario = usuario
   },
   DESLOGAR_USUARIO (state) {
     state.token = null
@@ -22,14 +23,26 @@ const actions = {
   efetuarLogin({ commit }, usuario) {
     return new Promise((resolve, reject) => {
       console.log(usuario)
-      api.post('entrar', usuario).then(res => {
+      api.post('entrar', usuario).then((res) => {
         commit('DEFINIR_USUARIO_LOGADO', {
-          token: res.data.access_token,
-          usuario: res.data.user
+          token: res.data.token,
+          usuario: res.data.usuario
         }) 
         resolve(res.data)
       }).catch(err => {
         console.log(err)
+        reject(err)
+      })
+    })
+  },
+  criarEmprestimo(emprestimo) {
+    console.log(emprestimo)
+    return new Promise((resolve, reject) => {
+      api.post('emprestimo/criar', emprestimo).then((res) => {
+        console.log(res);
+        resolve(emprestimo)
+      }).catch(err => {
+        console.log(err.code)
         reject(err)
       })
     })

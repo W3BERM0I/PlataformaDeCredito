@@ -7,10 +7,10 @@
   <section id="formulario">
     <div class="card-solicitacao">
       <h3>Solicitar Emprestimo</h3>
-      <form class="form-list" action="" method="post">
+      <form>
         <div class="mb-3 inputs">
           <label for="valor" class="form-label labels" id="valor">Valor a ser solicitado</label>
-          <input type="text" class="form-control input" id="myInput" name="valor" inputmode="numeric" v-model="emprestimo.valor" v-mask-decimal.br="2" required />
+          <input type="text" class="form-control input" id="myInput" name="valor" inputmode="numeric"  v-mask-decimal.br="2" v-model="emprestimo.valor" required />
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput" class="form-label labels" id="valor">Quantidade de parcelas</label>
@@ -18,7 +18,7 @@
             <option v-for="n in 72" :key="n" value="{{ n }}">{{ n }} x</option>
           </select>
         </div>
-        <div class="mb-3" id="submit"><button type="submit" class="btn-login">Enviar</button></div>
+        <div class="mb-3" id="submit"><button type="submit" @click.prevent="criarEmprestimo()" class="btn-login">Enviar</button></div>
       </form>
     </div>
   </section>
@@ -29,7 +29,17 @@
 export default {
   data() {
     return {
-      emprestimo: {valor: '100000', qtdParcela: ''}
+      emprestimo: {valor: '1.000,00', qtdParcela: '', clienteId: this.$store.state.usuario.id}
+    }
+  },
+  methods: {
+    criarEmprestimo() {
+      const emprestimoJson = JSON.stringify(this.emprestimo)
+        this.$store.dispatch("criarEmprestimo", emprestimoJson).then(() => {
+          this.emprestimo.valor = '100000'
+          this.
+          this.$router.push({ name: "Home" })}
+        ).catch((err) => console.log(err))
     }
   }
 }

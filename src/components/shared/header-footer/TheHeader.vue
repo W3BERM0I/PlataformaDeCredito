@@ -1,10 +1,11 @@
 <template>
     <header class="cabecalhoPrincipal" id="principalHeader">
     <div class="container">
-      <h1><router-link to="/home">CredEasy</router-link></h1>
+      <h1 v-show="usuarioestaLogado"><router-link to="/home">CredEasy</router-link></h1>
+      <h1 v-show="!usuarioestaLogado"><router-link to="/">CredEasy</router-link></h1>
       <div class="dropdown"  v-if="usuarioestaLogado">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Olá, {{ nomeCliente }}
+          Olá, {{ primeiroNome }}
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <li><router-link class="dropdown-item" to="">Meu Perfil</router-link></li>
@@ -31,8 +32,8 @@ export default {
     usuarioestaLogado () {
       return Boolean(this.$store.state.token)
     },
-    nomeCliente () {
-      return this.$store.state.usuario.nome
+    primeiroNome () {
+      return (this.$store.state.usuario.nome.split(' '))[0]
     }
   }
 }

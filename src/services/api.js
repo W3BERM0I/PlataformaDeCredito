@@ -1,5 +1,5 @@
 import axios from "axios";
-import provedor from "../provedor";
+import store from "../store";
 
 const api = axios.create({
   baseURL: "http://127.0.0.1:8000/api/",
@@ -10,7 +10,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(function (config) {
-  const token = provedor.state.token
+  const token = store.state.token
   if (token){
     config.headers.Authorization = `Bearer ${token}`
   }

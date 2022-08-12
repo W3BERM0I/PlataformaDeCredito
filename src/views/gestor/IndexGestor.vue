@@ -26,7 +26,7 @@
           <td>{{emprestimo.cliente.nome}}</td>
 
           <td>
-            <router-link to="" class="btn btn-secondary bo">Saiba mais</router-link>
+            <router-link :to="'analizar/emprestimo/' + emprestimo.id" class="btn btn-secondary bo">Saiba mais</router-link>
           </td>
         </tr>
       </tbody>
@@ -46,6 +46,7 @@ import api from '../../services/api'
   });
 
   const semEmprestimos = computed(() => TodosEmprestimos.value.length == 0);
+  
 </script>
 
 <script>
