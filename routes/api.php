@@ -27,8 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::post('emprestimo', [EmprestimoController::class, 'store']);
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('emprestimo/criar', [EmprestimoController::class, 'store']);
     Route::get('listaEmprestimosSolicitados', [EmprestimoController::class, 'listaEmprestimosSolicitados'])->name('emprestimos');
     Route::get('emprestimo/cliente', [EmprestimoController::class, 'BuscaEmprestimoPorCliente'])->name('emprestimo.cpf');
     Route::get('usuarios', [UserController::class, 'all'])->name('all');

@@ -28,12 +28,11 @@ class EmprestimoController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
-        $emprestimo = $this->repository->add($request);
-        return $emprestimo;
+        $emprestimo = $this->repository->add((array)($request->all()));
+        return response()->json(['emprestimo' => $emprestimo], 201);
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         $parcelas = $this->parcelaRepository->buscaParcelasPorEmprestimo($id);
         $emprestimo = $this->repository->buscaEmprestimoPorId($id);

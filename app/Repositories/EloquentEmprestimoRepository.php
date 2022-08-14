@@ -11,13 +11,15 @@ use Illuminate\Support\Facades\DB;
 
 class EloquentEmprestimoRepository implements EmprestimoRepository
 {
-  public function add(Request $request): Emprestimo
+  public function add(array $request): Emprestimo
   {
+    //Auth::user()->id
+    echo $request . PHP_EOL;
     DB::beginTransaction();
-    $valor = $request->valor;
-    $qtdParcelas = $request->qtdParcelas;
+    $valor = $request['valor'];
+    $qtdParcelas = $request['qtdParcelas'];
     $taxaJuros = 10;
-    $id = Auth::user()->id;
+    $id = $request['clienteId'];
     $valorTotal = (($valor * ($taxaJuros / 100)) * $qtdParcelas) + $valor;
     $emprestimo = Emprestimo::create([
       'valor' => $valor,
