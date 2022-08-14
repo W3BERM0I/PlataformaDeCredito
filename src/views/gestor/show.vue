@@ -44,7 +44,7 @@
         <form>
           <div class="form-atributes">
             <label class="info" for="taxa">taxa de Juros</label>
-            <input type="text" name="taxa" value="{{emprestimo.emprestimo.taxa_juros}} %">
+            <input type="text" name="taxa" :value="emprestimo.emprestimo.taxa_juros">
             <label class="info" for="status">Status</label>
             <select name="status" id="status">
               <option value="APROVADO">Aprovar</option>
@@ -60,7 +60,7 @@
 <script setup>
   import api from '../../services/api'
   import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+  import { useRoute } from 'vue-router';
   
   const emprestimo = ref([]);
   api.get('emprestimo/analisar/' + useRoute().params.id).then((res) => {

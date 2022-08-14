@@ -45,7 +45,6 @@ export default {
 .cabecalhoPrincipal .container {
   max-width: 100%;
   width: 100%;
-  height: 12vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,6 +58,7 @@ export default {
   justify-content: space-between;
   box-sizing: border-box;
   width: 100%;
+  min-height: 10vh;
   margin-left: 0;
 }
 

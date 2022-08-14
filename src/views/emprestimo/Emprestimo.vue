@@ -50,16 +50,16 @@
 </template>
 
 <script setup>
-  import api from '../../services/api'
   import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+  import { useRoute } from 'vue-router';
+  import api from '../../services/api'
   
   const emprestimo = ref([]);
   api.get('emprestimo/' + useRoute().params.id).then((res) => {
      emprestimo.value = res.data;
   });
-  console.log(emprestimo);
 </script>
+
 
 <style scoped>
   main {

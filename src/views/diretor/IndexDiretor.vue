@@ -35,35 +35,36 @@
                 </div>
               </Form>
             </td>
+            
           </tr>
         </tbody>
       </table>
+    <h2 v-if="semUsuarios()" class="flag">Não ha usuarios</h2>
     </div>
   </main>
 </template>
 
-<script setup>
-import api from '../../services/api';
-import { ref } from 'vue';
 
-const users = ref([]);
-api.get('usuarios').then((res) => {
-  users.value = res.data;
-})
-
-</script>
 
 <script>
- 
- export default {
+ import api from '../../services/api'
+
+  export default {
     data() {
       return {
+        users: [],
       }
+    },
+    created() {
+        api.get('usuarios').then((res) => {
+        this.users = res.data;
+       });
+    },
+    methods: {
+      semUsuarios() {
+        return Boolean(this.users.length == 0);
+      },
     }
-  };
-
-  function alteraTipoGestor(tipo) {
-    user.tipo_usuario = tipo;
   }
 </script>
 
@@ -86,5 +87,13 @@ main {
 .form-gestor>select {
   width: 40%;
   margin-right: 1vw;
+}
+
+.flag {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--cinza);
+  text-align: center;
+  margin-top: 1%;
 }
 </style>

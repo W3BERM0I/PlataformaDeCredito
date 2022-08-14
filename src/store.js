@@ -38,7 +38,7 @@ const actions = {
   criarEmprestimo(emprestimo) {
     console.log(emprestimo)
     return new Promise((resolve, reject) => {
-      api.post('emprestimo/criar', emprestimo).then((res) => {
+      api.post('emprestimo', emprestimo).then((res) => {
         console.log(res);
         resolve(emprestimo)
       }).catch(err => {

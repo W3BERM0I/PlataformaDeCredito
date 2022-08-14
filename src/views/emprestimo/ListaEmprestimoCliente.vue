@@ -4,7 +4,6 @@
         <div class="titulo">
           <h1>Emprestimos solicitados</h1>
         </div>
-
         <table class="table table-borderless">
           <thead class="tbhead">
             <tr>
@@ -18,21 +17,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(emprestimo, index) in EmprestimosCliente" :key="index">
+            <tr v-for="(emprestimo, index) in this.emprestimos" :key="index">
               <th scope="row">{{ emprestimo.id }}</th>
               <td>R$ {{ emprestimo.valor }}</td>
               <td>{{ emprestimo.parcelas }}</td>
               <td>{{ emprestimo.taxa_juros}} %</td>
               <td>{{ emprestimo.status}}</td>
               <td>{{ emprestimo.cliente.nome}}</td>
-
               <td>
                 <router-link :to="'emprestimo/' + emprestimo.id" class="btn btn-secondary bo">Saiba mais</router-link>
               </td>
             </tr>
           </tbody>
         </table>
-      <h2 v-if="semEmprestimos">Não ha emprestimos para serem analizados</h2>
+      <h2 v-if="semEmprestimos()" class="flag">Não ha emprestimos para serem analizados</h2>
        <div class="c">
         <div class="cria_emprestimos"><router-link class="bnovo" to="CriaEmprestimo">Solicitar emprestimo</router-link ></div>
       </div>
@@ -40,28 +38,25 @@
     </main>
 </template>
 
-<script setup>
-  import api from '../../services/api'
-  import { ref, computed } from 'vue';
-  
-  const EmprestimosCliente = ref([]);
-  api.get('emprestimo/cliente').then((res) => {
-     EmprestimosCliente.value = res.data;
-  });
-
-  const semEmprestimos = computed(() => EmprestimosCliente.value.length == 0);
-
-</script>
 
 <script>
-  import Emprestimo from '../../domain/Emprestimo';
-
+ import api from '../../services/api'
 
   export default {
     data() {
       return {
-        emprestimo: new Emprestimo()
+        emprestimos: [],
       }
+    },
+    created() {
+        api.get('emprestimo/cliente').then((res) => {
+        this.emprestimos = res.data;
+       });
+    },
+    methods: {
+      semEmprestimos() {
+        return Boolean(this.emprestimos.length == 0);
+      },
     }
   }
 </script>
@@ -156,5 +151,11 @@ td {
   justify-content: flex-end;
   margin-right: 5vw;
   margin-bottom: 5vh;
+}
+
+.flag {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 2%;
 }
 </style>
