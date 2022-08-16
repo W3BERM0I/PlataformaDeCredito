@@ -2,7 +2,7 @@
     <main>
       <div class="lista_emprestimos">
         <div class="titulo">
-          <h1>Emprestimos solicitados</h1>
+          <h1>Meus emprestimos</h1>
         </div>
         <table class="table table-borderless">
           <thead class="tbhead">
@@ -30,7 +30,7 @@
             </tr>
           </tbody>
         </table>
-      <h2 v-if="semEmprestimos()" class="flag">Não ha emprestimos para serem analizados</h2>
+      <h2 v-if="semEmprestimos()" class="flag">Não ha emprestimos para serem exibidos</h2>
        <div class="c">
         <div class="cria_emprestimos"><router-link class="bnovo" to="CriaEmprestimo">Solicitar emprestimo</router-link ></div>
       </div>

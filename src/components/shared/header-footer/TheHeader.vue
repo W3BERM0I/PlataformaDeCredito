@@ -1,8 +1,8 @@
 <template>
     <header class="cabecalhoPrincipal" id="principalHeader">
     <div class="container">
-      <h1 v-show="usuarioestaLogado"><router-link to="/home">CredEasy</router-link></h1>
-      <h1 v-show="!usuarioestaLogado"><router-link to="/">CredEasy</router-link></h1>
+      <h1 v-show="usuarioestaLogado"><router-link to="/home" class="link-front">CredEasy</router-link></h1>
+      <h1 v-show="!usuarioestaLogado"><router-link to="/" class="link-front">CredEasy</router-link></h1>
       <div class="dropdown"  v-if="usuarioestaLogado">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
           Olá, {{ primeiroNome }}
@@ -70,13 +70,13 @@ export default {
 .container>h1 {
   margin: 1vh 0 1vh 2vw;
   font-style: none;
-  border-style: none;
+  border-style: none
 }
 
-.container>h1>a {
-  width: 3.5vw;
-  height: 3.5vh;
-  padding: 0.4rem;
+.link-front {
+  width: 20%;
+  height: 30%;
+  padding: .4rem;
   color: var(--brancoClaro);
   font-style: none;
   text-decoration: none;
@@ -84,12 +84,10 @@ export default {
   font-weight: 700;
   border: 0.2rem solid var(--brancoClaro);
   border-radius: 100px;
-
 }
 
-.container>h1>a:hover {
+.link-front:hover {
   background-color: var(--verdeClaro);
-  color: var(--brancoClaro);
 }
   .entrar-link {
     color: var(--brancoClaro);
@@ -128,7 +126,7 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-  .container>h1>a {
+  .link-front {
     font-size: 1.5rem;
   }
 

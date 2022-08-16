@@ -14,8 +14,8 @@
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput" class="form-label labels" id="valor">Quantidade de parcelas</label>
-          <select class="form-select input select" id="qtdParcelas" name="qtdParcelas" aria-label="Default select example" required>
-            <option v-for="n in 72" :key="n" :v-model="emprestimo.qtdParcelas" value="{{ n }}">{{ n }} x</option>
+          <select class="form-select input select" id="qtdParcelas" name="qtdParcelas" v-model="emprestimo.qtdParcelas" aria-label="Default select example" required >
+            <option v-for="n in 72" :key="n" :value="n">{{ n }} x</option>
           </select>
         </div>
         <div class="mb-3" id="submit"><button type="submit" @click.prevent="criarEmprestimo()" class="btn-login">Enviar</button></div>
@@ -26,20 +26,21 @@
 </template>
 
 <script>
+import api from '../../services/api'
 export default {
   data() {
     return {
-      emprestimo: {valor: '1.000,00', qtdParcelas: '1', clienteId: this.$store.state.usuario.id}
+      emprestimo: {valor: '1.000,00', qtdParcelas: 1, clienteId: this.$store.state.usuario.id}
     }
   },
   methods: {
-    criarEmprestimo() {
-        console.log(this.emprestimo)
-        this.$store.dispatch("criarEmprestimo", this.emprestimo).then(() => {
-          this.emprestimo.valor = '100000'
-          this.
-          this.$router.push({ name: "Home" })}
-        ).catch((err) => console.log(err))
+    async criarEmprestimo() {
+         await api.post('emprestimo', this.emprestimo).then((res) => {
+        console.log(res);
+        this.$router.push({ name: "Home" })
+      }).catch(err => {
+        console.log(err.code)
+      })
     }
   }
 }

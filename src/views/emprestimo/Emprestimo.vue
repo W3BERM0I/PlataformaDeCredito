@@ -14,8 +14,13 @@
             <p class="emprestimo-campo">Valor aproximado de cada parcela:R$ {{ (emprestimo.emprestimo.valor_pago / emprestimo.emprestimo.parcelas).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</p>
             <p class="emprestimo-campo">Status: {{ emprestimo.emprestimo.status}}</p>
           </div>
+          <div class="cancelar" v-show="emprestimo.emprestimo.status == 'SOLICITADO'">
+            <form @click.prevent="cancelarEmprestimo()">
+              <button type="submit" class="btn btn-danger">Cancelar solicitação de emprestimo</button>
+            </form>
+          </div>
         </aside>
-        <aside class="right aside-card">
+        <aside v-show="emprestimo.emprestimo.status == 'APROVADO'" class="right aside-card">
           <h2 class="titulo">Parcelas</h2>
           <div class="conteudo"  >
             <table class="table table-bordered table-striped table-hover">
@@ -36,7 +41,7 @@
                   <td scope="row">{{parcela.status}}</td>
                   <td>
                     <form>
-                      <button type="submit" class="btn btn-secondary bo" value="">Pagar</button>
+                      <button type="submit" class="btn btn-secondary bo" @click.prevent="pagarParcela(parcela)">Pagar</button>
                     </form>
                   </td>
                 </tr>
@@ -55,9 +60,34 @@
   import api from '../../services/api'
   
   const emprestimo = ref([]);
-  api.get('emprestimo/' + useRoute().params.id).then((res) => {
+  listaEmprestimos()
+
+  async function listaEmprestimos() {
+    await api.get('emprestimo/' + useRoute().params.id).then((res) => {
      emprestimo.value = res.data;
   });
+
+  }
+
+  async function pagarParcela(parcela){
+    console.log(parcela)
+    await api.put('parcela/pagar', parcela).then((res) => {
+      listaEmprestimos()
+      this.$router.push({ name: "Emprestimo" })
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  async function cancelarEmprestimo(){
+    console.log(this.emprestimo.emprestimo)
+    await api.patch('emprestimo/cancelar', this.emprestimo.emprestimo).then(res => {
+      console.log(res)
+      listaEmprestimos()
+    }).catch(err => {
+      console.log(err)
+  });
+  }
 </script>
 
 
@@ -105,5 +135,9 @@
     font-weight: 700;
     font-size: 1.5rem;
     padding: 20px 40px;
+  }
+
+  .cancelar {
+    margin-bottom: 2%;
   }
 </style>

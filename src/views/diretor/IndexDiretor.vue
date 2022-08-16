@@ -16,16 +16,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in users" :key="index">
+          <tr v-for="(user, index) in users" :key="index" >
             <th scope="row">{{user.id}}</th>
             <td>{{user.nome}}</td>
             <td>R$ {{user.renda}}</td>
             <td>{{user.cpf}}</td>
             <td>{{user.tipo_usuario}}</td>
             <td>
-              <Form @submit.prevent="alteraTipoGestor()" method="POST">
+              <Form @submit.prevent="alteraTipoGestor(user)">
                 <div class="form-gestor">
-                  <select class="form-select" name="tipo_usuario" aria-label="Default select example" id="tipo_usuario" required>
+                  <select class="form-select" v-model="tipo_usuario" name="tipo_usuario" aria-label="Default select example" id="tipo_usuario" required>
                     <option value="COMUN">Comun</option>
                     <option value="GESTOR">Gestor</option>
                     <option value="DIRETOR">Diretor</option>
@@ -53,6 +53,7 @@
     data() {
       return {
         users: [],
+        tipo_usuario: 'COMUN'
       }
     },
     created() {
@@ -64,6 +65,14 @@
       semUsuarios() {
         return Boolean(this.users.length == 0);
       },
+      async alteraTipoGestor(user) {
+        user.tipo_usuario = this.tipo_usuario
+         await api.patch('diretor/edit/user', user).then(res => {
+           console.log(res)
+         }).catch(err => {
+           console.log(err)
+         })
+      }
     }
   }
 </script>

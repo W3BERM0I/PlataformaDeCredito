@@ -1,11 +1,11 @@
 import { createStore } from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 import api from './services/api.js'
 
 
 const estado = {
   token: null,
-  usuario: {
-  }
+  usuario: {},
 }
 
 const mutations = {
@@ -45,12 +45,13 @@ const actions = {
         console.log(err.code)
         reject(err)
       })
-    })
+  })
   }
 }
 
 export default new createStore({
   state: estado,
   mutations,
-  actions
+  actions,
+  plugins: [createPersistedState()],
 })

@@ -25,7 +25,7 @@
         </div>
         <div class="form-cadastro">
           <label for="profissao">Profissão</label>
-          <input type="text" id="profissao" name="profissao" class="input" required />
+          <input type="text" id="profissao" name="profissao" v-model="user.profissao" class="input" required />
         </div>
         <div class="form-cadastro">
           <label for="renda">Renda</label>
@@ -33,18 +33,18 @@
         </div>
         <div class="form-cadastro">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" class="input" required />
+          <input type="email" name="email" id="email" v-model="user.email" class="input" required />
         </div>
         <div class="form-cadastro">
           <label for="senha">Senha</label>
-          <input type="password" name="senha" id="senha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="senha" required />
+          <input type="password" name="senha" id="senha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." v-model="user.senha" data-tipo="senha" required />
         </div>
         <div class="form-cadastro confirmar_senha">
           <label for="senha">Confirme a senha</label>
-          <input type="password" id="confirmarSenha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="compararSenha" required />
+          <input type="password" id="confirmarSenha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" v-model="user.confirmarSenha" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="compararSenha" required />
         </div>
         <div class="submit">
-          <input type="submit" value="Criar Conta" class="enviar" />
+          <input type="submit" @click.prevent="criarConta" value="Criar Conta" class="enviar" />
         </div>
       </form>
     </div>
@@ -54,11 +54,24 @@
 
 <script>
 
-
+import api from '../../services/api';
 export default {
   data() {
     return {
       user: {nome: "", cpf: "", telefone: "", endereco: "", profissao: "", renda: "", email: "", senha: "", confirmarSenha: ""}
+    }
+  },
+  methods: {
+    async criarConta() {
+      if(this.user.senha !== this.user.confirmarSenha) {
+        console.log("Senhas devem ser identicas")
+        return
+      }
+      await api.post('cadastrar', this.user).then((res) => {
+        this.$router.push({ name: "Entrar" })
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 }

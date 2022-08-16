@@ -44,13 +44,13 @@
         <form>
           <div class="form-atributes">
             <label class="info" for="taxa">taxa de Juros</label>
-            <input type="text" name="taxa" :value="emprestimo.emprestimo.taxa_juros">
+            <input type="text" name="taxa" v-model="emprestimoData.taxa">
             <label class="info" for="status">Status</label>
-            <select name="status" id="status">
+            <select name="status" id="status" v-model="emprestimoData.status">
               <option value="APROVADO">Aprovar</option>
               <option value="REJEITADO">Rejeitar</option>
             </select>
-            <button type="submit" class="btn btn-success button">Finalizar</button>
+            <button type="submit" @click.prevent="avaliaEmprestimo() " class="btn btn-success button">Finalizar</button>
           </div>
         </form>
       </div>
@@ -58,14 +58,39 @@
 </template>
 
 <script setup>
-  import api from '../../services/api'
-  import { ref } from 'vue';
-  import { useRoute } from 'vue-router';
   
   const emprestimo = ref([]);
   api.get('emprestimo/analisar/' + useRoute().params.id).then((res) => {
      emprestimo.value = res.data;
   });
+</script>
+
+<script>
+  import api from '../../services/api'
+  import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
+
+  export default {
+    data() {
+        return {
+          emprestimoData: {
+          taxa: 10,
+          emprestimoid: useRoute().params.id,
+          status: 'APROVADO'
+          }
+      }
+    },
+    methods: {
+      async avaliaEmprestimo(){
+        await api.put('emprestimo/analisar/' + useRoute().params.id, this.emprestimoData).then(res => {
+          this.$router.push({ name: "IndexGestor" })
+          
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    }
+  }
 </script>
 
 <style scoped>
