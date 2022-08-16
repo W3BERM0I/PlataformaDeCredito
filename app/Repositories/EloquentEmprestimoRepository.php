@@ -2,25 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Models\Cliente;
 use App\Models\Emprestimo;
-use App\Models\Parcela;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EloquentEmprestimoRepository implements EmprestimoRepository
 {
   public function add(array $request): Emprestimo
   {
-    //Auth::user()->id
-    echo $request . PHP_EOL;
-    DB::beginTransaction();
-    $valor = $request['valor'];
+    $valor = (preg_replace("/[^0-9]/", "", $request['valor'])) / 100;
     $qtdParcelas = $request['qtdParcelas'];
     $taxaJuros = 10;
     $id = $request['clienteId'];
     $valorTotal = (($valor * ($taxaJuros / 100)) * $qtdParcelas) + $valor;
+    DB::beginTransaction();
     $emprestimo = Emprestimo::create([
       'valor' => $valor,
       'taxa_juros' => $taxaJuros,

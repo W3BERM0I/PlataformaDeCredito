@@ -53,7 +53,7 @@ class EmprestimoController extends Controller
      */
     public function store(Request $request)
     {
-        $emprestimo = $this->repository->add($request);
+        $this->repository->add($request->all());
         return to_route('home', 302);
     }
 
@@ -67,7 +67,7 @@ class EmprestimoController extends Controller
     {
         $parcelas = $this->parcelaRepository->buscaParcelasPorEmprestimo($id);
         $emprestimo = $this->repository->buscaEmprestimoPorId($id);
-        return view('emprestimo.show', ['parcelas' => $parcelas, 'emprestimo' => $emprestimo]);
+        return response()->json(['parcelas' => $parcelas, 'emprestimo' => $emprestimo], 200);
     }
 
     public function cancelarSolicitacao(int $id)

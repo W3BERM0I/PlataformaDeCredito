@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/entrar', [UserController::class, 'validaLogin'])->name('valida.login');
 Route::get('/deslogar', [UserController::class, 'logout'])->name('logout');
+Route::post('/cadastrar', [UserController::class, 'store']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -29,9 +30,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('emprestimo', [EmprestimoController::class, 'store']);
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('listaEmprestimosSolicitados', [EmprestimoController::class, 'listaEmprestimosSolicitados'])->name('emprestimos');
-    Route::get('emprestimo/cliente', [EmprestimoController::class, 'BuscaEmprestimoPorCliente'])->name('emprestimo.cpf');
-    Route::get('usuarios', [UserController::class, 'all'])->name('all');
+    Route::get('listaEmprestimosSolicitados', [EmprestimoController::class, 'listaEmprestimosSolicitados']);
+    Route::get('emprestimo/cliente', [EmprestimoController::class, 'BuscaEmprestimoPorCliente']);
+    Route::patch('emprestimo/cancelar', [EmprestimoController::class, 'cancelarSolicitacao']);
+    Route::get('usuarios', [UserController::class, 'all']);
+    Route::patch('diretor/edit/user', [UserController::class, 'alterarTipoUsuario']);
+    Route::put('parcela/pagar', [EmprestimoController::class, 'pagarParcela']);
+    Route::get('emprestimo/{id}', [EmprestimoController::class, 'show']);
+    Route::get('emprestimo/analisar/{id}', [EmprestimoController::class, 'analisar']);
+    Route::put('emprestimo/analisar/{id}', [EmprestimoController::class, 'respostaEmprestimo']);
 });
-Route::get('emprestimo/{id}', [EmprestimoController::class, 'show']);
-Route::get('emprestimo/analisar/{id}', [EmprestimoController::class, 'analisar']);

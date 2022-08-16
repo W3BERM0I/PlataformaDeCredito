@@ -36,4 +36,19 @@ class UserController extends Controller
         Auth::logout();
         return response()->json([], 204);
     }
+
+
+    public function store(Request $request)
+    {
+        $this->repository->add($request);
+        return response()->json([], 302);
+    }
+
+    public function alterarTipoUsuario(Request $request)
+    {
+        if (Auth::user()->tipo_usuario !== 'DIRETOR')
+            return response()->json('Acesso negado', 401);
+        $this->repository->atualizarTipoUsuario($request->id, $request->tipo_usuario);
+        return response()->json('Tipo de asuario atualizado', 201);
+    }
 }

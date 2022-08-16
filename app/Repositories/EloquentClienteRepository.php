@@ -39,29 +39,18 @@ class EloquentClienteRepository implements ClienteRepository
     return $cliente;
   }
 
-  public function alteraUsuario(Request $request): void
-  {
-    dd($request);
-  }
-
   public function all()
   {
     return Cliente::all();
   }
 
+  public function atualizarTipoUsuario(int $id, string $tipo): void
+  {
+    Cliente::whereId($id)->update(['tipo_usuario' => $tipo]);
+  }
+
   public function buscaClientePorId(int $id)
   {
     return Cliente::whereId($id)->first();
-  }
-
-  public function promoverUser(int $id): void
-  {
-    Cliente::updateOrCreate(['id' => $id], ['tipo_usuario' => 'GESTOR']);
-  }
-
-  public function despromoverUser(int $id): void
-  {
-    dd($id);
-    Cliente::whereId($id)->update(['tipo_usuario' => 'COMUN']);
   }
 }
