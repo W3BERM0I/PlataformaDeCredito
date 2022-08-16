@@ -65,15 +65,13 @@
   async function listaEmprestimos() {
     await api.get('emprestimo/' + useRoute().params.id).then((res) => {
      emprestimo.value = res.data;
-  });
-
+    })
   }
 
   async function pagarParcela(parcela){
     console.log(parcela)
     await api.put('parcela/pagar', parcela).then((res) => {
       listaEmprestimos()
-      this.$router.push({ name: "Emprestimo" })
     }).catch(err => {
       console.log(err);
     });
