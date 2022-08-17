@@ -44,7 +44,7 @@
         <form>
           <div class="form-atributes">
             <label class="info" for="taxa">taxa de Juros</label>
-            <input type="text" name="taxa" v-model="emprestimoData.taxa">
+            <input type="text"  name="taxa" v-model="emprestimoData.taxa">
             <label class="info" for="status">Status</label>
             <select name="status" id="status" v-model="emprestimoData.status">
               <option value="APROVADO">Aprovar</option>
@@ -82,6 +82,7 @@
     },
     methods: {
       async avaliaEmprestimo(){
+        if(this.emprestimoData.taxa > 20) this.emprestimoData.taxa = 20
         await api.put('emprestimo/analisar/' + useRoute().params.id, this.emprestimoData).then(res => {
           this.$router.push({ name: "IndexGestor" })
           

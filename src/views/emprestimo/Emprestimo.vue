@@ -35,10 +35,12 @@
               </thead>
               <tbody>
                 <tr v-for="parcela in emprestimo.parcelas" :key="parcela.id">
-                  <th scope="row">{{parcela.numero}}</th>
+                  <td scope="row">{{parcela.numero}}</td>
                   <td scope="row">R$ {{parcela.valor}}</td>
-                  <td scope="row">{{parcela.data_vencimento}}</td>
-                  <td scope="row">{{parcela.status}}</td>
+                  <td scope="row" v-show="!parcelaAtrasada(parcela)">{{parcela.data_vencimento}}</td>
+                  <td scope="row" v-show="parcelaAtrasada(parcela)" class="parcelaAtrasada">{{parcela.data_vencimento}}</td>
+                  <td scope="row" v-show="!parcelaAtrasada(parcela)">{{parcela.status}}</td>
+                  <td scope="row" v-show="parcelaAtrasada(parcela)" class="parcelaAtrasada">ATRASADA</td>
                   <td>
                     <form>
                       <button type="submit" class="btn btn-secondary bo" @click.prevent="pagarParcela(parcela)">Pagar</button>
@@ -69,7 +71,6 @@
   }
 
   async function pagarParcela(parcela){
-    console.log(parcela)
     await api.put('parcela/pagar', parcela).then((res) => {
       listaEmprestimos()
     }).catch(err => {
@@ -78,13 +79,22 @@
   }
 
   async function cancelarEmprestimo(){
-    console.log(this.emprestimo.emprestimo)
     await api.patch('emprestimo/cancelar', this.emprestimo.emprestimo).then(res => {
       console.log(res)
       listaEmprestimos()
     }).catch(err => {
       console.log(err)
   });
+  }
+
+  function parcelaAtrasada(parcela) {
+    if(parcela.status == 'ABERTA'){
+       let data_vencimento = parcela.data_vencimento.split('-')
+       let dateParcela = new Date(data_vencimento[2], data_vencimento[1], data_vencimento[0])
+       let nowDate = new Date()
+       if(nowDate > dateParcela) return true
+      }
+    return false;
   }
 </script>
 
@@ -137,5 +147,9 @@
 
   .cancelar {
     margin-bottom: 2%;
+  }
+
+  .parcelaAtrasada {
+    color: red !important;
   }
 </style>
