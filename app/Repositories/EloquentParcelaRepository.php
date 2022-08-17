@@ -7,7 +7,6 @@ use App\Models\Parcela;
 use DateInterval;
 use DateTimeImmutable;
 use DomainException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EloquentParcelaRepository implements ParcelaRepository
@@ -40,7 +39,12 @@ class EloquentParcelaRepository implements ParcelaRepository
       echo $e->getMessage();
       throw new DomainException();
     }
+
     $parcela->update(['status' => 'PAGA', 'data_pagamento' => new DateTimeImmutable()]);
+
+    if ($this->verificaSeEmprestimoFoiQuitado($parcela->emprestimo_id))
+      Emprestimo::whereId($parcela->emprestimo_id)->first()->update(['status' => 'QUITADO']);
+
     return $message;
   }
 
@@ -50,8 +54,7 @@ class EloquentParcelaRepository implements ParcelaRepository
       $parcela->update(['multa' => '2', 'valor' => ($parcela->valor * 1.02)]);
 
     $parcelas = $this->buscaParcelasPorEmprestimo($parcela->emprestimo_id);
-    if (($parcela->numero - 1) == 0)
-      return;
+    if (($parcela->numero - 1) == 0) return;
     foreach ($parcelas as $par) {
       if ($par->numero == ($parcela->numero - 1))
         $parcelaAnterior = $par;
@@ -59,6 +62,16 @@ class EloquentParcelaRepository implements ParcelaRepository
     if ($parcelaAnterior->status !== 'PAGA')
       throw new DomainException();
     return 'Sucesso';
+  }
+
+  public function verificaSeEmprestimoFoiQuitado(int $id)
+  {
+    $parcelas = $this->buscaParcelasPorEmprestimo($id);
+    $count = 0;
+    foreach ($parcelas as $par)
+      if ($par->status == 'PAGA') $count++;
+    if ($count == count($parcelas)) return true;
+    return false;
   }
 
   public function buscaParcelasPorEmprestimo(int $id)
