@@ -15,7 +15,7 @@
         <div class="mb-3">
           <label for="formGroupExampleInput" class="form-label labels" id="valor">Quantidade de parcelas</label>
           <select class="form-select input select" id="qtdParcelas" name="qtdParcelas" v-model="emprestimo.qtdParcelas" aria-label="Default select example" required >
-            <option v-for="n in 72" :key="n" :value="n">{{ n }} x</option>
+            <option v-for="n in qtdMaximaParcelas" :key="n" :value="n">{{ n }} x R$ {{Math.round(valorParcela / n)}}</option>
           </select>
         </div>
         <div class="mb-3" id="submit"><button type="submit" @click.prevent="criarEmprestimo()" class="btn-login">Enviar</button></div>
@@ -35,15 +35,24 @@ export default {
   },
   methods: {
     async criarEmprestimo() {
-         await api.post('emprestimo', this.emprestimo).then((res) => {
-        console.log(res);
+        await api.post('emprestimo', this.emprestimo).then((res) => {
         this.$router.push({ name: "Home" })
       }).catch(err => {
-        console.log(err.code)
+        console.log(err);
       })
     }
+  },
+  computed: {
+    valorParcela() {
+      let valor = ((this.emprestimo.valor).replace(".", "").replace(',', "") / 100)
+      return valor * 1.1
+    },
+    qtdMaximaParcelas() {
+      return Math.round(this.valorParcela / 200 - 1)
+    }
+
   }
-}
+};
 </script>
 
 <style scoped>

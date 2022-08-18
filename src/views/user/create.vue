@@ -13,35 +13,35 @@
         </div>
         <div class="form-cadastro">
           <label for="cpf" class="input-label">cpf</label>
-          <input type="text" id="cpf" class="input" name="cpf" autocomplete="off" maxlength="14" v-model="user.cpf" v-mask-cpf required />
+          <input type="text" id="cpf" class="input" name="cpf" autocomplete="off" maxlength="14" v-model="user.cpf" v-mask-cpf />
         </div>
         <div class="form-cadastro">
           <label for="telefone">telefone</label>
-          <input type="text" id="telefone" name="telefone" class="input" maxlength="15" v-model="user.telefone" v-mask-phone.br required />
+          <input type="text" id="telefone" name="telefone" class="input" maxlength="15" v-model="user.telefone" v-mask-phone.br/>
         </div>
         <div class="form-cadastro">
           <label for="Endereço">Endereço</label>
-          <input type="text" id="endereco" name="endereco" v-model="user.endereco" class="input" maxlength="255" required />
+          <input type="text" id="endereco" name="endereco" v-model="user.endereco" class="input"/>
         </div>
         <div class="form-cadastro">
           <label for="profissao">Profissão</label>
-          <input type="text" id="profissao" name="profissao" v-model="user.profissao" class="input" required />
+          <input type="text" id="profissao" name="profissao" v-model="user.profissao" class="input" />
         </div>
         <div class="form-cadastro">
           <label for="renda">Renda</label>
-          <input type="text" id="renda" class="input" name="renda" v-model="user.renda" v-mask-decimal.br="2" data-tipo="preco" required />
+          <input type="text" id="renda" class="input" name="renda" v-model="user.renda" v-mask-decimal.br="2"/>
         </div>
         <div class="form-cadastro">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" v-model="user.email" class="input" required />
+          <input type="email" name="email" id="email" v-model="user.email" class="input"/>
         </div>
         <div class="form-cadastro">
           <label for="senha">Senha</label>
-          <input type="password" name="senha" id="senha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." v-model="user.senha" data-tipo="senha" required />
+          <input type="password" name="senha" id="senha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ !@#$%^&*_=+-]).{6,40}$" v-model="user.senha"/>
         </div>
         <div class="form-cadastro confirmar_senha">
           <label for="senha">Confirme a senha</label>
-          <input type="password" id="confirmarSenha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,40}$" v-model="user.confirmarSenha" title="A senha deve conter entre 6 a 40 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos." data-tipo="compararSenha" required />
+          <input type="password" id="confirmarSenha" class="input" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,40}$" v-model="user.confirmarSenha"/>
         </div>
         <div class="submit">
           <input type="submit" @click.prevent="criarConta" value="Criar Conta" class="enviar" />
@@ -55,6 +55,7 @@
 <script>
 
 import api from '../../services/api';
+
 export default {
   data() {
     return {
@@ -64,13 +65,18 @@ export default {
   methods: {
     async criarConta() {
       if(this.user.senha !== this.user.confirmarSenha) {
-        console.log("Senhas devem ser identicas")
+        this.$toast.error("Os campos de senha não são idênticos ")
         return
       }
+
+      if(this.user.senha.length < 3) return
+
       await api.post('cadastrar', this.user).then((res) => {
         this.$router.push({ name: "Entrar" })
+        this.$toast.success('Conta criada com sucesso')
       }).catch((err) => {
-        console.log(err)
+        this.$toast.error('Por favor informe outro e-mail!')
+
       })
     }
   }

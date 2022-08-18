@@ -11,7 +11,7 @@
             <p class="emprestimo-campo">Taxa de Juros: {{ emprestimo.emprestimo.taxa_juros}}%</p>
             <p class="emprestimo-campo">Data da Solicitação: {{ emprestimo.emprestimo.data_solicitacao}}</p>
             <p class="emprestimo-campo">Quantidade de parcelas: {{ emprestimo.emprestimo.parcelas}}</p>
-            <p class="emprestimo-campo">Valor aproximado de cada parcela:R$ {{ (emprestimo.emprestimo.valor_pago / emprestimo.emprestimo.parcelas).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</p>
+            <p class="emprestimo-campo">Valor aproximado de cada parcela: {{ (emprestimo.emprestimo.valor_pago / emprestimo.emprestimo.parcelas).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</p>
             <p class="emprestimo-campo">Status: {{ emprestimo.emprestimo.status}}</p>
           </div>
           <div class="cancelar" v-show="emprestimo.emprestimo.status == 'SOLICITADO'">
@@ -58,10 +58,11 @@
 
 <script setup>
   import { ref } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { useRoute } from 'vue-router'
   import api from '../../services/api'
   
   const emprestimo = ref([]);
+
   listaEmprestimos()
 
   async function listaEmprestimos() {
@@ -80,8 +81,8 @@
 
   async function cancelarEmprestimo(){
     await api.patch('emprestimo/cancelar', this.emprestimo.emprestimo).then(res => {
-      console.log(res)
       listaEmprestimos()
+      this.$toast.success('cpf cancelado')
     }).catch(err => {
       console.log(err)
   });

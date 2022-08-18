@@ -30,23 +30,26 @@
 </template>
 
 <script>
+  import { createToaster } from "@meforma/vue-toaster"
 
   export default {
     data() {
       return {
         user: {email: "", password: ""},
-        mensagemErro: ""
+        mensagem: ""
       }
     },
     methods: {
       efetuarLogin(){
         this.$store.dispatch("efetuarLogin", this.user).then(() =>{
          this.$router.push({ name: "Home" })
-         this.mensagemErro = ''
+         this.mensagem = 'Login efetuado com sucesso'
+         this.$toast.success(this.mensagem)
          }).catch( erro => {
-          if (erro.request.status === 401) {
-            this.mensagemErro = 'Login ou senha invalido(s)'
-          }
+            this.mensagem = 'Login ou senha invalido(s)'
+            this.$toast.error(this.mensagem, {
+              position: 'bottom-left'
+            })
         })
       }
     }
