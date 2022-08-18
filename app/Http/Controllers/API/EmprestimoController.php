@@ -31,7 +31,11 @@ class EmprestimoController extends Controller
 
     public function store(EmprestimoFormRequest $request)
     {
-        $emprestimo = $this->repository->add($request->all());
+        try {
+            $emprestimo = $this->repository->add($request->all());
+        } catch (DomainException $e) {
+            return response()->json(['mensagem' => 'valor da percela minimo é de 200'], 401);
+        }
         return response()->json(['emprestimo' => $emprestimo], 201);
     }
 

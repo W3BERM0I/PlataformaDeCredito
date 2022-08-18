@@ -3,17 +3,20 @@
 namespace App\Repositories;
 
 use App\Models\Emprestimo;
+use DomainException;
 use Illuminate\Support\Facades\DB;
 
 class EloquentEmprestimoRepository implements EmprestimoRepository
 {
   public function add(array $request): Emprestimo
   {
-    $valor = (preg_replace("/[^0-9]/", "", $request['valor'])) / 100;
+    $valor = str_replace(".", "", $request['valor']);
+    $valor = str_replace(',', "", $valor) / 100;
     $qtdParcelas = $request['qtdParcelas'];
     $taxaJuros = 10;
     $id = $request['clienteId'];
-    $valorTotal = (($valor * ($taxaJuros / 100)) * $qtdParcelas) + $valor;
+    $valorTotal = $valor * 1.1;
+    if ($valorTotal / $qtdParcelas < 200) throw new DomainException();
     DB::beginTransaction();
     $emprestimo = Emprestimo::create([
       'valor' => $valor,
