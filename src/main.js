@@ -6,7 +6,6 @@ import router from './router'
 import store from './store'
 import Toaster from "@meforma/vue-toaster"
 
-
 import 'vue-loading-overlay/dist/vue-loading.css';
 
 const app = createApp(App)

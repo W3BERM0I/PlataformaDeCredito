@@ -7,7 +7,7 @@
           <h1 class="titulo">Emprestimo</h1>
           <div class="conteudo">
             <p class="emprestimo-campo">ID do emprestimo: {{ emprestimo.emprestimo.id }} </p>
-            <p class="emprestimo-campo">Valor: R$ {{ (emprestimo.emprestimo.valor).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</p>
+            <p class="emprestimo-campo">Valor: {{ (formataCampoMonetario(emprestimo.emprestimo.valor) / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</p>
             <p class="emprestimo-campo">Taxa de Juros: {{ emprestimo.emprestimo.taxa_juros}}%</p>
             <p class="emprestimo-campo">Data da Solicitação: {{ emprestimo.emprestimo.data_solicitacao}}</p>
             <p class="emprestimo-campo">Quantidade de parcelas: {{ emprestimo.emprestimo.parcelas}}</p>
@@ -96,6 +96,11 @@
        if(nowDate > dateParcela) return true
       }
     return false;
+  }
+
+  function  formataCampoMonetario(valor) {
+    valor = valor.replace(",", "").replace(".", "")
+    return valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
   }
 </script>
 

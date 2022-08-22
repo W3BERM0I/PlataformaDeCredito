@@ -55,6 +55,7 @@
 <script>
 
 import api from '../../services/api';
+import { cpf } from 'cpf-cnpj-validator'; 
 
 export default {
   data() {
@@ -64,20 +65,41 @@ export default {
   },
   methods: {
     async criarConta() {
+      let flag = 0
       if(this.user.senha !== this.user.confirmarSenha) {
         this.$toast.error("Os campos de senha não são idênticos ")
-        return
+        flag = 1
+      }
+      
+      await api.post('emailECpf', [this.user.email, this.user.cpf]).then(res => {
+        if(res.data.email !== null) {
+          this.$toast.error('E-mail informado ja esta em uso!')
+          flag = 1
+        }
+        if(res.data.cpf !== null) {
+        this.$toast.error('CPF informado ja esta em uso!')
+          flag = 1
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+
+      if(!cpf.isValid(this.user.cpf)){
+       this.$toast.error('CPF informado é invalido!')
+        flag = 1
       }
 
-      if(this.user.senha.length < 3) return
 
+      if(this.user.senha.length < 3) flag = 1
+
+      if(flag == 0) {
       await api.post('cadastrar', this.user).then((res) => {
         this.$router.push({ name: "Entrar" })
         this.$toast.success('Conta criada com sucesso')
       }).catch((err) => {
-        this.$toast.error('Por favor informe outro e-mail!')
-
+        console.log(err)
       })
+    }
     }
   }
 }
