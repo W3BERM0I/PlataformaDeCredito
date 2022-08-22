@@ -10,8 +10,7 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
 {
   public function add(array $request): Emprestimo
   {
-    $valor = str_replace(".", "", $request['valor']);
-    $valor = str_replace(',', "", $valor) / 100;
+    $valor = str_replace(",", "", (str_replace(".", "", $request['valor']))) / 100;
     $qtdParcelas = $request['qtdParcelas'];
     $taxaJuros = 10;
     $id = $request['clienteId'];
@@ -86,8 +85,9 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
 
   public function aprovaEmprestimo(int $id, float $juros): void
   {
+    $juros = $juros / 100 + 1;
     $emprestimo = Emprestimo::whereId($id)->first();
-    $valorTotal = (($emprestimo->valor * ($juros / 100)) * $emprestimo->parcelas) + $emprestimo->valor;
+    $valorTotal = $emprestimo->valor * $juros;
     $emprestimo->update(['status' => 'APROVADO', 'taxa_juros' => $juros, 'valor_pago' => $valorTotal]);
   }
 

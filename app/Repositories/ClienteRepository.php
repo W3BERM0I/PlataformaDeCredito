@@ -11,4 +11,6 @@ interface ClienteRepository
   public function all();
   public function atualizarTipoUsuario(int $id, string $tipo): void;
   public function buscaClientePorId(int $id);
+  public function emailValido(string $email);
+  public function cpfValido(string $cpf);
 }

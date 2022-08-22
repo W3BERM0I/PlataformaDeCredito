@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/entrar', [UserController::class, 'validaLogin'])->name('valida.login');
 Route::get('/deslogar', [UserController::class, 'logout'])->name('logout');
 Route::post('/cadastrar', [UserController::class, 'store']);
+Route::post('emailECpf', [UserController::class, 'emailECpf']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

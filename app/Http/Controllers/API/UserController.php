@@ -30,6 +30,18 @@ class UserController extends Controller
         return response()->json('Usuario invalido', 401);
     }
 
+    public function emailECpf(Request $request)
+    {
+        $all = $request->all();
+        $count = 0;
+        foreach ($all as $data) {
+            if ($count == 0) $email = $this->repository->emailValido($data);
+            if ($count == 1) $cpf = $this->repository->cpfValido($data);
+            $count++;
+        }
+        return response()->json(['cpf' => $cpf, 'email' => $email]);
+    }
+
     public function logout()
     {
         auth()->user()->tokens()->delete();

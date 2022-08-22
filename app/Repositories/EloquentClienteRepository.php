@@ -44,6 +44,16 @@ class EloquentClienteRepository implements ClienteRepository
     return Cliente::all();
   }
 
+  public function emailValido(string $email)
+  {
+    return Cliente::whereEmail($email)->first();
+  }
+
+  public function cpfValido(string $cpf)
+  {
+    return Cliente::whereCpf($cpf)->first();
+  }
+
   public function atualizarTipoUsuario(int $id, string $tipo): void
   {
     Cliente::whereId($id)->update(['tipo_usuario' => $tipo]);
