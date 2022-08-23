@@ -89,6 +89,10 @@ export default {
         flag = 1
       }
 
+      if(!(this.user.email).includes('@') && !(this.user.email).includes('.')) {
+       this.$toast.error('E-mail informado é invalido!')
+       flag = 1
+      }
 
       if(this.user.senha.length < 3) flag = 1
 
