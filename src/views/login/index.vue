@@ -22,7 +22,7 @@
           </div>
           <div class="textfield"><button @click.prevent="efetuarLogin" class="btn-login">Login</button></div>
         </form>
-        <router-link to="/recuperar-senha">Esqueci minha senha</router-link>
+        <router-link to="/RecuperarSenha">Esqueci minha senha</router-link>
         <router-link to="/cadastrar">Sou novo aqui</router-link>
       </div>
     </section>

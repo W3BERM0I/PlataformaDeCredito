@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Toaster from "@meforma/vue-toaster"
+import { createPinia } from 'pinia'
 
 import 'vue-loading-overlay/dist/vue-loading.css';
 
@@ -14,6 +15,7 @@ app.use(router)
 app.use(store)
 app.use(VueLoading)
 app.use(Toaster)
+app.use(createPinia())
 app.mount('#app')
 
 

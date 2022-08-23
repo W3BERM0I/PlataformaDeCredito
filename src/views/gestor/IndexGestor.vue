@@ -140,4 +140,11 @@ h1 {
   margin-left: 1vw;
   width: 10vw;
 }
+
+.flag {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--cinza);
+}
 </style>
