@@ -68,7 +68,6 @@ class EmprestimoController extends Controller
         $parcelas = $this->parcelaRepository->buscaParcelasPorEmprestimo($id);
         $emprestimo = $this->repository->buscaEmprestimoPorId($id);
         return view('emprestimo.show', ['parcelas' => $parcelas, 'emprestimo' => $emprestimo]);
-        // return response()->json(['parcelas' => $parcelas, 'emprestimo' => $emprestimo], 200);
     }
 
     public function cancelarSolicitacao(int $id)

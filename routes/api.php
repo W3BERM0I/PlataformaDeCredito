@@ -21,6 +21,7 @@ Route::post('/entrar', [UserController::class, 'validaLogin'])->name('valida.log
 Route::get('/deslogar', [UserController::class, 'logout'])->name('logout');
 Route::post('/cadastrar', [UserController::class, 'store']);
 Route::post('emailECpf', [UserController::class, 'emailECpf']);
+Route::post('/recuperarConta', [UserController::class, 'recuperarConta']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -29,8 +30,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('emprestimo', [EmprestimoController::class, 'store']);
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('emprestimo', [EmprestimoController::class, 'store']);
     Route::get('listaEmprestimosSolicitados', [EmprestimoController::class, 'listaEmprestimosSolicitados']);
     Route::get('emprestimo/cliente', [EmprestimoController::class, 'BuscaEmprestimoPorCliente']);
     Route::patch('emprestimo/cancelar', [EmprestimoController::class, 'cancelarSolicitacao']);

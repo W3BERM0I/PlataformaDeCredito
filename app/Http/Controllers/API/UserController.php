@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RecuperarAcessoConta;
 use App\Repositories\ClienteRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class UserController extends Controller
 {
@@ -40,6 +44,18 @@ class UserController extends Controller
             $count++;
         }
         return response()->json(['cpf' => $cpf, 'email' => $email]);
+    }
+
+    public function recuperarConta(Request $request)
+    {
+        $emailRec = strval(($request->all())[0]);
+        $email = new RecuperarAcessoConta($emailRec);
+        try {
+            Mail::to('moisesweber01@gmail.com')->send($email);
+        } catch (Exception $e) {
+            response()->json(['msg' => $emailRec], 404);
+        }
+        response()->json(['msg' => 'teste']);
     }
 
     public function logout()
