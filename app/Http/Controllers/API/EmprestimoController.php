@@ -31,6 +31,7 @@ class EmprestimoController extends Controller
 
     public function store(EmprestimoFormRequest $request)
     {
+        dd($request);
         try {
             $emprestimo = $this->repository->add($request->all());
         } catch (DomainException $e) {

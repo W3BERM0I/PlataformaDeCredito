@@ -35,12 +35,13 @@ class GestorController extends Controller
     public function processaEmprestimo(int $id, Request $request)
     {
         if ($request->status == 'REJEITADO') {
-            $this->emprestimoRepository->rejeitaEmprestimo($id);
-        } else {
-            $taxa = explode("%", $request->taxa);
-            $this->emprestimoRepository->aprovaEmprestimo($id, $taxa[0]);
-            $this->parcelaRepository->addParcelasPorEmprestimo($id);
+          $this->emprestimoRepository->rejeitaEmprestimo($id);
+          return to_route('gestor.index');
         }
+        $taxa = explode("%", $request->taxa);
+        $this->emprestimoRepository->aprovaEmprestimo($id, $taxa[0]);
+        $this->parcelaRepository->addParcelasPorEmprestimo($id);
+
         return to_route('gestor.index');
     }
 }

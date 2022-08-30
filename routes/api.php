@@ -31,9 +31,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('emprestimo', [EmprestimoController::class, 'store']);
     Route::get('listaEmprestimosSolicitados', [EmprestimoController::class, 'listaEmprestimosSolicitados']);
     Route::get('emprestimo/cliente', [EmprestimoController::class, 'BuscaEmprestimoPorCliente']);
+    Route::post('emprestimo', [EmprestimoController::class, 'store']);
     Route::patch('emprestimo/cancelar', [EmprestimoController::class, 'cancelarSolicitacao']);
     Route::get('usuarios', [UserController::class, 'all']);
     Route::patch('diretor/edit/user', [UserController::class, 'alterarTipoUsuario']);
