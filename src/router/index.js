@@ -9,6 +9,7 @@ import indexGestor from '../views/gestor/IndexGestor.vue'
 import showGestor from '../views/gestor/show.vue'
 import entrar from '../views/login/index.vue'
 import cadastrar from '../views/user/create.vue'
+import AtualizarCliente from '../views/user/alter.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,7 +62,12 @@ const router = createRouter({
       meta: {
         publica: true
       }
-     },
+    },
+      {
+        path: '/cliente',
+        name: 'AtualizarCliente',
+        component: AtualizarCliente
+      },
      {
        path: '/Emprestimo/:id',
        name: 'Emprestimo',

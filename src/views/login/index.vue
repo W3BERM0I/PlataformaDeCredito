@@ -1,42 +1,69 @@
 <template>
   <main>
-    <section>
-      <div class="informacao">
-        <h2 id="informacao__titulo">Bem-vindo a CredEasy</h2>
-        <p>
-          Somos a maneira mais facil de você alcançar os seus
-          sonhos
-        </p>
-      </div>
+      <section>
+        <div class="informacao">
+             <h2 id="informacao__titulo">Bem-vindo a CredEasy</h2>
+              <p>
+                Somos a maneira mais facil de você alcançar os seus
+                sonhos
+              </p>
+            </div>
 
-      <div class="card-login">
-        <h1>Entrar</h1>
-        <form @submit.prevent="efetuarLogin" method="post">
-          <div class="textfield">
-            <label for="email">E-mail</label>
-            <input type="email" name="email" v-model="user.email" id="email" required />
+            <div class="card-login">
+              <h1>Entrar</h1>
+              <form>
+                <div class="textfield">
+                  <label for="email">E-mail</label>
+                  <input type="email" name="email" v-model="user.email" id="email" required />
+                </div>
+                <div class="textfield">
+                  <label for="password">Senha</label>
+                  <input type="password" name="password" v-model="user.password" required />
+                </div>
+                <div class="textfield"><button @click.prevent="efetuarLogin" class="btn-login">Login</button></div>
+              </form>
+              <p>
+                <button type="button" class="btn btn-recuperar" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Recuperar senha
+                </button>
+              </p>
+              <router-link to="/cadastrar">Sou novo aqui</router-link>
+            </div>
+          </section>
+          </main>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">trocar a senha</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form style="width: 100%">
+            <div class="modal-body">
+              <p>Identifique-se para receber um e-mail com as instruções e o link para criar uma nova senha.</p>
+              <label for="email-recuperar">e-mail:</label>
+              <input type="email" name="email-recuperar" v-model="recuperarSenha" id="email-recuperar" required />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button @click.prevent="enviarEmailRecuperacao()" class="btn btn-submit-recuperar" data-bs-dismiss="modal">Enviar</button>
+            </div>
+            </form>
           </div>
-          <div class="textfield">
-            <label for="password">Senha</label>
-            <input type="password" name="password" v-model="user.password" required />
-          </div>
-          <div class="textfield"><button @click.prevent="efetuarLogin" class="btn-login">Login</button></div>
-        </form>
-        <router-link to="/recuperar-senha">Esqueci minha senha</router-link>
-        <router-link to="/cadastrar">Sou novo aqui</router-link>
-      </div>
-    </section>
-  </main>
+        </div>
+    </div>
+  
 </template>
 
 <script>
-  import { createToaster } from "@meforma/vue-toaster"
+import api from '../../services/api'
 
   export default {
     data() {
       return {
         user: {email: "", password: ""},
-        mensagem: ""
+        mensagem: "",
+        recuperarSenha: ""
       }
     },
     methods: {
@@ -51,8 +78,20 @@
               position: 'bottom-left'
             })
         })
-      }
+      },
+      async enviarEmailRecuperacao(){
+      await api.post('recuperarConta', [this.recuperarSenha]).then(res => {
+         this.$toast.success('E-mail enviado com sucesso', {
+              position: 'bottom-left'
+            })
+            console.log(res)
+      }).catch(err => {
+        console.log(err)
+        this.$toast.error('Ocorreu um erro inesperado na hora de enviar o e-mail')
+      })
     }
+    },
+    
   }
 </script>
 
@@ -224,6 +263,38 @@ form {
   font-weight: 400;
   font-size: 1.3em;
 }
+
+.btn-recuperar{
+  color: var(--brancoClaro);
+  font-size: 20px;
+}
+
+.btn-submit-recuperar {
+  background: var(--verdeClaro);
+  color: var(--brancoClaro);
+}
+
+.modal-body>p {
+  font-size: 18px;
+}
+
+.modal-body>label {
+font-size: 18px;
+margin-top: 3%;
+}
+
+.modal-body>input {
+  width: 80%;
+}
+.modal-footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-footer>button {
+  width: 45%;
+}
+
 
 @media screen and (max-width: 768px) {
   #container__link {

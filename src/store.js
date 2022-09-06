@@ -28,6 +28,7 @@ const actions = {
           token: res.data.token,
           usuario: res.data.usuario
         }) 
+        console.log(res.data.usuario)
         resolve(res.data)
       }).catch(err => {
         console.log(err)

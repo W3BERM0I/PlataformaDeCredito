@@ -8,7 +8,7 @@
           Olá, {{ primeiroNome }}
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><router-link class="dropdown-item" to="">Meu Perfil</router-link></li>
+          <li><router-link class="dropdown-item" to="/cliente">Meu Perfil</router-link></li>
           <li><a class="dropdown-item" href="#" @click.prevent="efetuarLogout">Sair</a></li>
         </ul>
       </div>
@@ -21,15 +21,15 @@
 import api from '../../../services/api'
 export default {
   methods: {
-    efetuarLogout () {
+    efetuarLogout() {
       this.$store.commit('DESLOGAR_USUARIO')
-      api.get('deslogar');
+      api.get('deslogar').then(res => console.log(res)).catch(err => console.log(err))
       this.$router.push({ name: 'Entrar'})
 
     }
   },
   computed: {
-    usuarioestaLogado () {
+    usuarioestaLogado() {
       return Boolean(this.$store.state.token)
     },
     primeiroNome () {

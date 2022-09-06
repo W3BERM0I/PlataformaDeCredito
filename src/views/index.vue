@@ -13,7 +13,7 @@
   <section class="solucoes">
     <cardIndex :texto="'Voce esta pensando em ampliar o seu negocio mas esta sem capital venha conhecer as nossas soluções com juros baixos e sem burocracia'" :titulo="'Credito Empresarial'" />
     <cardIndex :texto="'Voce esta pensando em comprar ou trocar de automovel ou imovel'" :titulo="'Credito Pessoal'" />
-    <cardIndex :texto="'Soluções exclusivas para estudantes financiarem suas mensalidades ou custo de vida.'" :titulo="'Credito Estudantil'" />
+    <cardIndex :texto="'Soluções exclusivas para estudantes financiarem seus custos estudantis.'" :titulo="'Credito Estudantil'" />
   </section>
   <section id="futuro">
     <div class="futuro__titulo">

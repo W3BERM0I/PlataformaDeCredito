@@ -10,12 +10,15 @@
       <form>
         <div class="mb-3 inputs">
           <label for="valor" class="form-label labels" id="valor">Valor a ser solicitado</label>
-          <input type="text" class="form-control input" id="myInput" name="valor" inputmode="numeric"  v-mask-decimal.br="2" v-model="emprestimo.valor" required />
+          <div class="emprestimo-valor">
+          <input type="text" name="pre-fix" readonly id="pre-fix-valor" value="R$">
+          <input type="text" class="form-control input emprestimo-valor" id="myInput" name="valor" inputmode="numeric"  v-mask-decimal.br="2" v-model="emprestimo.valor" required />
+          </div>
         </div>
         <div class="mb-3">
           <label for="formGroupExampleInput" class="form-label labels" id="valor">Quantidade de parcelas</label>
           <select class="form-select input select" id="qtdParcelas" name="qtdParcelas" v-model="emprestimo.qtdParcelas" aria-label="Default select example" required >
-            <option v-for="n in qtdMaximaParcelas" :key="n" :value="n">{{ n }} x R$ {{Math.round(valorParcela / n)}}</option>
+            <option v-for="n in qtdMaximaParcelas" :key="n" :value="n">{{ n }} x {{(valorParcela / n).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}</option>
           </select>
         </div>
         <div class="mb-3" id="submit"><button type="submit" @click.prevent="criarEmprestimo()" class="btn-login">Enviar</button></div>
@@ -35,6 +38,8 @@ export default {
   },
   methods: {
     async criarEmprestimo() {
+        this.emprestimo.valor = this.emprestimo.valor.replace(/[^0-9]/g,'')
+        console.log(this.emprestimo.valor)
         await api.post('emprestimo', this.emprestimo).then((res) => {
         this.$router.push({ name: "Home" })
       }).catch(err => {
@@ -44,11 +49,16 @@ export default {
   },
   computed: {
     valorParcela() {
-      let valor = ((this.emprestimo.valor).replace(".", "").replace(',', "") / 100)
+      let valor = this.emprestimo.valor
+      if((this.emprestimo.valor).includes(".") || (this.emprestimo.valor).includes(","))
+        valor = ((this.emprestimo.valor).replace(".", "").replace(",", "") / 100)
       return valor * 1.1
     },
     qtdMaximaParcelas() {
-      return Math.round(this.valorParcela / 200 - 1)
+      let qtdParcela = Math.round(this.valorParcela / 200 - 1)
+      if(qtdParcela <= 1 && this.valor > 200) return 1;
+      if (qtdParcela > 72) return 72
+      return qtdParcela
     }
 
   }
@@ -62,6 +72,17 @@ main {
   width: 100vw;
   height: 90vh;
   background-color: var(--brancoEscuro);
+}
+
+.emprestimo-valor {
+  display: flex;
+  background: white;
+}
+
+#pre-fix-valor {
+  width: 10%;
+  background: white;
+  border: none;
 }
 
 #propaganda {
