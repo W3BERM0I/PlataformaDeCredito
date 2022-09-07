@@ -50,6 +50,7 @@ export default {
   computed: {
     valorParcela() {
       let valor = this.emprestimo.valor
+      
       if((this.emprestimo.valor).includes(".") || (this.emprestimo.valor).includes(","))
         valor = ((this.emprestimo.valor).replace(".", "").replace(",", "") / 100)
       return valor * 1.1
