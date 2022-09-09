@@ -5,7 +5,7 @@
     <div class="info-cadastro">
       <h2 class="desktop">Crie o seu cadastro e venha fazer parte do nosso time</h2>
       <h2 class="mobile">Crie a sua conta gratís</h2>
-      <p class="desktop">Acesso facil e rápido e com as melhores taxas do mercado</p>
+      <p class="desktop">Acesso facil e rápido com as melhores taxas do mercado</p>
       <form action="" method="post">
         <div class="form-cadastro nome_completo">
           <label for="nome" class="input-label">Nome completo</label>
@@ -53,7 +53,6 @@
 
 
 <script>
-
 import api from '../../services/api';
 import { cpf } from 'cpf-cnpj-validator'; 
 

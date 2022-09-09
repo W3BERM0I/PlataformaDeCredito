@@ -58,11 +58,12 @@
 
 <script setup>
   import { ref } from 'vue';
+  import { inject } from 'vue'
   import { useRoute } from 'vue-router'
   import api from '../../services/api'
   
   const emprestimo = ref([]);
-
+  const toast = inject('toast');
   listaEmprestimos()
 
   async function listaEmprestimos() {
@@ -74,15 +75,15 @@
   async function pagarParcela(parcela){
     await api.put('parcela/pagar', parcela).then((res) => {
       listaEmprestimos()
-    }).catch(err => {
-      console.log(err);
-    });
+      toast.success('Emprestimo cancelado')
+    }).catch(err =>  toast.success('Erro')
+);
   }
 
   async function cancelarEmprestimo(){
     await api.patch('emprestimo/cancelar', this.emprestimo.emprestimo).then(res => {
       listaEmprestimos()
-      this.$toast.success('cpf cancelado')
+      toast.success('Emprestimo cancelado')
     }).catch(err => {
       console.log(err)
   });

@@ -1,7 +1,7 @@
 <template>
 <main>
  <section id="propaganda">
-    <h2>Solicite o seu emprestimo e venha fazer parte do time</h2>
+    <h2>Solicite o seu emprestimo  venha fazer parte do time</h2>
     <p>Apos o envio do formulário a sua proposta vai ser analisada e entraremos em contato em até 24 horas úteis</p>
   </section>
   <section id="formulario">
@@ -50,7 +50,7 @@ export default {
   computed: {
     valorParcela() {
       let valor = this.emprestimo.valor
-      
+
       if((this.emprestimo.valor).includes(".") || (this.emprestimo.valor).includes(","))
         valor = ((this.emprestimo.valor).replace(".", "").replace(",", "") / 100)
       return valor * 1.1
