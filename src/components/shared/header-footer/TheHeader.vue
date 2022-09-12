@@ -49,7 +49,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   font-family: 'Lato';
-  background-color: var(--verdeClaro);
+  background-color: red;
 }
 
 

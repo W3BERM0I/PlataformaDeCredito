@@ -84,7 +84,7 @@
       async avaliaEmprestimo(){
         if(this.emprestimoData.taxa > 20) this.emprestimoData.taxa = 20
         if(this.emprestimoData.taxa < 10) this.emprestimoData.taxa = 10
-        await api.put('emprestimo/analisar/' + useRoute().params.id, this.emprestimoData).then(res => {
+        await api.put('emprestimo/analisar/' + this.emprestimoData.emprestimoid, this.emprestimoData).then(res => {
           this.$router.push({ name: "IndexGestor" })
           
         }).catch(err => {

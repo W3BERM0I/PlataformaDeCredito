@@ -63,8 +63,7 @@
 
 <style scoped>
   .principal {
-  height: 80vh;
-  width: 100vw;
+  min-height: 80vh;
   display: flex;
 }
 
@@ -73,25 +72,6 @@ main {
   min-height: 80vh;
   flex-direction: column;
 }
-
-#search {
-  margin-bottom: 2vh;
-}
-
-#search>input {
-  padding: 5px 30px;
-  margin-left: 2%;
-  margin-right: 1%;
-}
-
-#search>button {
-  background: var(--verdeClaro);
-  color: var(--brancoEscuro);
-  border: 0;
-  border-radius: 20%;
-  padding: 8px 20px;
-}
-
 
 .lista__emprestimos {
   flex-direction: column;
@@ -121,14 +101,16 @@ td {
 }
 
 .cria_emprestimos {
-  width: 15%;
   margin-top: 1.9em;
+  padding: 2px 10px;
   border-radius: 8px;
   background-color: var(--verdeClaro);
   cursor: pointer;
   box-shadow: 0px 10px 40px -12px var(--preto);
   display: flex;
   justify-content: center;
+  text-align: center;
+  flex-wrap: nowrap;
 }
 
 .bnovo {
@@ -136,10 +118,8 @@ td {
   text-align: center;
   color: var(--cinzaEscuro);
   font-weight: 700;
-  justify-content: center;
-  align-items: center;
-  width: 10vw;
-  padding: 12px;
+  flex-wrap: nowrap;
+  padding: 12px 20px;
 }
 
 .bnovo:hover {

@@ -58,12 +58,10 @@
 
 <script setup>
   import { ref } from 'vue';
-  import { inject } from 'vue'
   import { useRoute } from 'vue-router'
   import api from '../../services/api'
   
   const emprestimo = ref([]);
-  const toast = inject('toast');
   listaEmprestimos()
 
   async function listaEmprestimos() {
@@ -74,16 +72,15 @@
 
   async function pagarParcela(parcela){
     await api.put('parcela/pagar', parcela).then((res) => {
-      listaEmprestimos()
-      toast.success('Emprestimo cancelado')
-    }).catch(err =>  toast.success('Erro')
+      if(res.data == 'Parcela paga com sucesso')
+        parcela.status = 'PAGA'
+    }).catch(err =>  console.log('erro')
 );
   }
 
   async function cancelarEmprestimo(){
     await api.patch('emprestimo/cancelar', this.emprestimo.emprestimo).then(res => {
       listaEmprestimos()
-      toast.success('Emprestimo cancelado')
     }).catch(err => {
       console.log(err)
   });
@@ -123,7 +120,6 @@
     background: var(--brancoClaro);
     justify-content: space-around;
     min-height: 70%;
-    width: 90vw;
     border-radius: 12%;
     margin: 3% 0 3% 0;
     border: 1px solid var(--cinza);

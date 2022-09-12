@@ -1,14 +1,16 @@
-# estágio de compilação
-FROM node:lts-alpine as build-stage
+FROM node:latest as base
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
 COPY package*.json ./
-RUN npm install
-COPY . .
+RUN npm ci
+COPY ./ .
+
+FROM base as testrunner
+ENTRYPOINT [ "npm", "run", "test" ]
+
+FROM base as build
 RUN npm run build
 
-# estágio de produção
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:latest
+RUN mkdir /app
+COPY --from=build /app/dist /app
+COPY deploy/nginx.conf /etc/nginx/nginx.conf
