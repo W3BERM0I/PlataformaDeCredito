@@ -85,7 +85,7 @@ class EloquentEmprestimoRepository implements EmprestimoRepository
 
   public function aprovaEmprestimo(int $id, float $juros): void
   {
-    $juros = $juros / 100 + 1;
+    $juros = $juros;
     $emprestimo = Emprestimo::whereId($id)->first();
     $valorTotal = $emprestimo->valor * $juros;
     $emprestimo->update(['status' => 'APROVADO', 'taxa_juros' => $juros, 'valor_pago' => $valorTotal]);
