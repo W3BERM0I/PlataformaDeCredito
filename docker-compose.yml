@@ -2,29 +2,54 @@ version: '3.7'
 
 services:
 
-  #PHP Service
-  app:
-    build: .
-    container_name: app
-    working_dir: /var/www/html/
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app1
+    restart: always
+    ports:
+      - 8001:80
+      - 8443:443
+    depends_on:
+      - db
     volumes:
-      - ./:/var/www/html/
-      - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+      - ./:/var/www/html
+      - ./Docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
 
-  #Nginx Service
-  webserver:
-    image: nginx:alpine
-    container_name: webserver
-    restart: unless-stopped
-    tty: true
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app2
+    restart: always
     ports:
-      - "8000:80"
-      - "8143:443"
+      - 8002:80
+      - 8444:443
+    depends_on:
+      - db
     volumes:
-      - ./:/var/www/html/
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./:/var/www/html
+      - ./Docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  app3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app3
+    restart: always
+    ports:
+      - 8003:80
+      - 8445:443
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html
+      - ./Docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
 
@@ -44,10 +69,14 @@ services:
       - app-network
 
   haproxy:
-    build: ./haproxy
+    image: haproxy:lts
     container_name: haproxy
     ports:
-      - "80:80"
+      - "8000:80"
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy:ro
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
