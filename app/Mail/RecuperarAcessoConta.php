@@ -18,7 +18,6 @@ class RecuperarAcessoConta extends Mailable
      */
     public function __construct(public string $email)
     {
-        //
     }
 
     /**

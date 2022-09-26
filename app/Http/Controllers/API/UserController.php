@@ -9,7 +9,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class UserController extends Controller
 {
@@ -49,7 +48,7 @@ class UserController extends Controller
     public function recuperarConta(Request $request)
     {
         $emailRec = strval(($request->all())[0]);
-        $email = new RecuperarAcessoConta($emailRec);
+        $email = (new RecuperarAcessoConta($emailRec))->build();
         try {
             Mail::to('moisesweber01@gmail.com')->send($email);
         } catch (Exception $e) {
@@ -60,7 +59,7 @@ class UserController extends Controller
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        Auth()->user()->tokens()->delete();
         Auth::logout();
         return response()->json([], 204);
     }

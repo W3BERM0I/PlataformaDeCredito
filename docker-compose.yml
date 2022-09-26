@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-
   app1:
     build:
       context: .
@@ -75,6 +74,14 @@ services:
       - "8000:80"
     volumes:
       - ./haproxy:/usr/local/etc/haproxy:ro
+    networks:
+      - app-network
+
+  web:
+    image: webermoi/credeasy-vue:1.0
+    container_name: web
+    ports:
+      - "8080:8080"
     networks:
       - app-network
 
