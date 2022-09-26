@@ -7,9 +7,8 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-##About docker
-docker build -t credeasy-front .
-docker run -it -d --name cred-front -p 8080:80 credeasy-front
+## About docker
+get the command in CLI if docker is installed: docker-compose up
 
 ## About Laravel
 
