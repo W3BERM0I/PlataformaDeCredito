@@ -2,7 +2,7 @@
   <main>
     <!-- <h3>{{ emprestimo.parcelas }}</h3> -->
     <section>
-      <card class="emprestimo">
+      <card class="emprestimo" v-if="emprestimo.emprestimo">
         <aside class="left aside-card">
           <h1 class="titulo">Emprestimo</h1>
           <div class="conteudo">
@@ -15,8 +15,8 @@
             <p class="emprestimo-campo">Status: {{ emprestimo.emprestimo.status}}</p>
           </div>
           <div class="cancelar" v-show="emprestimo.emprestimo.status == 'SOLICITADO'">
-            <form @click.prevent="cancelarEmprestimo()">
-              <button type="submit" class="btn btn-danger">Cancelar solicitação de emprestimo</button>
+            <form @click.prevent="cancelarEmprestimo(emprestimo.emprestimo)">
+              <button type="submit" class="btn btn-danger">Cancelar</button>
             </form>
           </div>
         </aside>
@@ -74,13 +74,21 @@
     await api.put('parcela/pagar', parcela).then((res) => {
       if(res.data == 'Parcela paga com sucesso')
         parcela.status = 'PAGA'
+      let aux = 1;
+      this.emprestimo.parcelas.forEach(par => {
+        if(par.status != 'PAGA')
+          aux = 0
+      });
+      if(aux == 1)
+        this.emprestimo.emprestimo.status == "QUITADO"
     }).catch(err =>  console.log('erro')
 );
   }
 
-  async function cancelarEmprestimo(){
-    await api.patch('emprestimo/cancelar', this.emprestimo.emprestimo).then(res => {
-      listaEmprestimos()
+  async function cancelarEmprestimo(emprestimo){
+    console.log(emprestimo)
+    await api.patch('emprestimo/cancelar', emprestimo).then(res => {
+      emprestimo.status = 'CANCELADO'
     }).catch(err => {
       console.log(err)
   });

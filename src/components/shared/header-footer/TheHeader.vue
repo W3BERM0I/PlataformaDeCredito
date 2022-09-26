@@ -44,12 +44,12 @@ export default {
 
 .cabecalhoPrincipal .container {
   max-width: 100%;
-  height: 12 vh;
+  height: 12vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: 'Lato';
-  background-color: red;
+  background-color: var(--verdeClaro);
 }
 
 

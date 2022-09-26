@@ -39,7 +39,6 @@ export default {
   methods: {
     async criarEmprestimo() {
         this.emprestimo.valor = this.emprestimo.valor.replace(/[^0-9]/g,'')
-        console.log(this.emprestimo.valor)
         await api.post('emprestimo', this.emprestimo).then((res) => {
         this.$router.push({ name: "Home" })
       }).catch(err => {

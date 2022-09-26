@@ -1,16 +1,21 @@
-FROM node:latest as base
+FROM node:lts-alpine
+
+RUN npm install -g http-server
+
+RUN npm install -g @vue/cli
+
+RUN mkdir /app
+
 WORKDIR /app
+
 COPY package*.json ./
-RUN npm ci
-COPY ./ .
 
-FROM base as testrunner
-ENTRYPOINT [ "npm", "run", "test" ]
+RUN npm install
 
-FROM base as build
+COPY . .
+
 RUN npm run build
 
-FROM nginx:latest
-RUN mkdir /app
-COPY --from=build /app/dist /app
-COPY deploy/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 8080
+
+CMD [ "http-server", "dist" ]
